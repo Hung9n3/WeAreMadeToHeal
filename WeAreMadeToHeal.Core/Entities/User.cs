@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
+using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal
 {
@@ -6,11 +8,13 @@ namespace WeAreMadeToHeal
     {
         public string Email { get; set; }
         public string Name { get; set; }
-        public string Birthday { get; set; }
+        public DateTime Birthday { get; set; } = DateTime.MinValue;
         public string Username { get; set; }
         public string Password { get; set; }
-        public bool EmailConfirmed { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? Address { get; set; }
+        public bool EmailConfirmed { get; set; } = false;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public bool PhoneNumberConfirmed { get; set; } = false;
+        public UserRoles Role { get; set; }
+        public string Address { get; set; } = string.Empty;
     }
 }

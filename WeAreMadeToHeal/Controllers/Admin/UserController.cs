@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WeAreMadeToHeal
+namespace WeAreMadeToHeal.Admin
 {
     public class UserController : BaseAdminController<User, IUserLogic>
     {

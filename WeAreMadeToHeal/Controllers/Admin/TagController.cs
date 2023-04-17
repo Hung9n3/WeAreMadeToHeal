@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
+using WeAreMadeToHeal.Extensions;
 
-namespace WeAreMadeToHeal
+namespace WeAreMadeToHeal.Admin
 {
     public class TagController : BaseAdminController<Tag, ITagLogic>
     {

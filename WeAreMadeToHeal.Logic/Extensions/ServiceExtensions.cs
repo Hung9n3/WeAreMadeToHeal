@@ -11,7 +11,7 @@ namespace WeAreMadeToHeal
     {
         public static void AddLogic(this IServiceCollection services)
         {
-            //services.AddScoped<LogicContext>();
+            services.AddScoped<LogicContext>();
 
             services.AddTransient<IUserLogic, UserLogic>();
             services.AddTransient<ITagLogic, TagLogic>();

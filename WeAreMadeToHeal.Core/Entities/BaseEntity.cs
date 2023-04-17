@@ -8,7 +8,6 @@ namespace WeAreMadeToHeal
 {
     public class BaseEntity
     {
-        public string EntityType { get; set; }
 
         public string Id { get; set; }
 
@@ -25,12 +24,6 @@ namespace WeAreMadeToHeal
             CreatedAt = utcNow;
             UpdatedAt = utcNow;
             IsActive = true;
-        }
-
-        public BaseEntity(string entityType)
-            : this()
-        {
-            EntityType = entityType;
         }
     }
 }
