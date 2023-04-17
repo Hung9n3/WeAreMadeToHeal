@@ -10,5 +10,10 @@ public class CartItemLogic : BaseLogic<CartItem, ICartItemRepository>, ICartItem
 {
     public CartItemLogic(ICartItemRepository dataProvider) : base(dataProvider)
     {
+        #region [Custom Method Return Single]
+        #endregion
+
+        #region [Custom Method Return List]
+        #endregion
     }
 }

@@ -10,6 +10,7 @@ namespace WeAreMadeToHeal
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public DateTime ExpiredAt { get; set; }
         public string ReduceRate { get; set; }
     }
 }

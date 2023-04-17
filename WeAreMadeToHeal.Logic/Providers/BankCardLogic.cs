@@ -10,5 +10,10 @@ public class BankCardLogic : BaseLogic<BankCard, IBankCardRepository>, IBankCard
 {
     public BankCardLogic(IBankCardRepository dataProvider) : base(dataProvider)
     {
+        #region [Custom Method Return Single]
+        #endregion
+
+        #region [Custom Method Return List]
+        #endregion
     }
 }

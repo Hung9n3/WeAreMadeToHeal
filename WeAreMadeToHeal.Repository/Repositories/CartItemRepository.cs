@@ -11,6 +11,11 @@ namespace WeAreMadeToHeal
     {
         public CartItemRepository(WRMTHDbContext context) : base(context)
         {
+            #region [Custom Method Return Single]
+            #endregion
+
+            #region [Custom Method Return List]
+            #endregion
         }
     }
 }

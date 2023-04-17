@@ -10,5 +10,10 @@ public class CouponUserLogic : BaseLogic<CouponUser, ICouponUserRepository>, ICo
 {
     public CouponUserLogic(ICouponUserRepository dataProvider) : base(dataProvider)
     {
+        #region [Custom Method Return Single]
+        #endregion
+
+        #region [Custom Method Return List]
+        #endregion
     }
 }
