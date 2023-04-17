@@ -10,5 +10,10 @@ public class TagLogic : BaseLogic<Tag, ITagRepository>, ITagLogic
 {
     public TagLogic(ITagRepository dataProvider) : base(dataProvider)
     {
+        #region [Custom Method Return Single]
+        #endregion
+
+        #region [Custom Method Return List]
+        #endregion
     }
 }

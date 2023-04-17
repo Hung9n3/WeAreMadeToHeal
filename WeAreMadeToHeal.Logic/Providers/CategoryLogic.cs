@@ -10,5 +10,10 @@ public class CategoryLogic : BaseLogic<Category, ICategoryRepository>, ICategory
 {
     public CategoryLogic(ICategoryRepository dataProvider) : base(dataProvider)
     {
+        #region [Custom Method Return Single]
+        #endregion
+
+        #region [Custom Method Return List]
+        #endregion
     }
 }

@@ -11,6 +11,11 @@ namespace WeAreMadeToHeal
     {
         public BankCardRepository(WRMTHDbContext context) : base(context)
         {
+            #region [Custom Method Return Single]
+            #endregion
+
+            #region [Custom Method Return List]
+            #endregion
         }
     }
 }

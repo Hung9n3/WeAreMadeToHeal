@@ -10,5 +10,10 @@ public class ProductLogic : BaseLogic<Product, IProductRepository>, IProductLogi
 {
     public ProductLogic(IProductRepository dataProvider) : base(dataProvider)
     {
+        #region [Custom Method Return Single]
+        #endregion
+
+        #region [Custom Method Return List]
+        #endregion
     }
 }

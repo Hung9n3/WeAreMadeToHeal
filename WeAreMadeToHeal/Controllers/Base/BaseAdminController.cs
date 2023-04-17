@@ -5,12 +5,12 @@ namespace WeAreMadeToHeal
     [ApiController]
     [Route("api/v{version:apiVersion}/admin/[controller]")]
     [ApiVersion("1.0")]
-    public class BaseAdminController<T, TLogic> : ControllerBase where T : BaseEntity where TLogic : IBaseLogicProvider<T>
+    public abstract class BaseAdminController<T, TLogic> : ControllerBase where T : BaseEntity where TLogic : IBaseLogicProvider<T>
     {
         #region [ Fields ]
-        private readonly ILogger<BaseAdminController<T, TLogic>> _logger;
-        private readonly LogicContext _logicContext;
-        private readonly TLogic _logic;
+        protected readonly ILogger<BaseAdminController<T, TLogic>> _logger;
+        protected readonly LogicContext _logicContext;
+        protected readonly TLogic _logic;
         #endregion
 
         #region [ CTor ]
@@ -30,7 +30,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> AddAsync([FromBody] T entity)
+        public virtual async Task<IActionResult> AddAsync([FromBody] T entity)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateAsync([FromBody] T entity)
+        public virtual async Task<IActionResult> UpdateAsync([FromBody] T entity)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteAsync(string id)
+        public virtual async Task<IActionResult> DeleteAsync(string id)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ActivateOrDeactiveAsync(string id, bool isActive)
+        public virtual async Task<IActionResult> ActivateOrDeactiveAsync(string id, bool isActive)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAsync(string id)
+        public virtual async Task<IActionResult> GetAsync(string id)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllAsync()
+        public virtual async Task<IActionResult> GetAllAsync()
         {
             try
             {
@@ -186,7 +186,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetActiveOrInActiveAsync(bool isActive)
+        public virtual async Task<IActionResult> GetActiveOrInActiveAsync(bool isActive)
         {
             try
             {
@@ -215,7 +215,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetBatchAsync([FromBody] List<string> entityIds)
+        public virtual async Task<IActionResult> GetBatchAsync([FromBody] List<string> entityIds)
         {
             try
             {
@@ -244,7 +244,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetChangesAsync([FromBody] DateTime date)
+        public virtual async Task<IActionResult> GetChangesAsync([FromBody] DateTime date)
         {
             try
             {

@@ -10,5 +10,10 @@ public class OrderItemLogic : BaseLogic<OrderItem, IOrderItemRepository>, IOrder
 {
     public OrderItemLogic(IOrderItemRepository dataProvider) : base(dataProvider)
     {
+        #region [Custom Method Return Single]
+        #endregion
+
+        #region [Custom Method Return List]
+        #endregion
     }
 }
