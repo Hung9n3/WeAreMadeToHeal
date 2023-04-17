@@ -3,7 +3,7 @@
 namespace WeAreMadeToHeal
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/admin/[controller]")]
     [ApiVersion("1.0")]
     public class BaseAdminController<T, TLogic> : ControllerBase where T : BaseEntity where TLogic : IBaseLogicProvider<T>
     {
