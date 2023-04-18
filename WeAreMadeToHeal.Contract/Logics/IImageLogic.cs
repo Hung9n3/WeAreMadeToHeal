@@ -8,5 +8,7 @@ namespace WeAreMadeToHeal
 {
     public interface IImageLogic : IBaseLogicProvider<Image>
     {
+        Task<List<Image>> GetByProductAsync(string productId);
+
     }
 }

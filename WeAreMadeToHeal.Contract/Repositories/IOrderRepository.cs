@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal
 {
-    public interface ICartItemLogic : IBaseLogicProvider<CartItem>
+    public interface IOrderRepository : IBaseRepository<Order>
     {
-        Task<List<CartItem>> GetByUserAsync(string userId);
+        Task<List<Order>> GetByUserAsync(string userId);
     }
 }

@@ -8,5 +8,6 @@ namespace WeAreMadeToHeal
 {
     public interface ITagLogic : IBaseLogicProvider<Tag>
     {
+        Task<List<Tag>> GetByProduct(string productId);
     }
 }

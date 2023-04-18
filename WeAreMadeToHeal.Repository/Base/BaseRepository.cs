@@ -198,21 +198,37 @@ namespace WeAreMadeToHeal
             }
         }
 
-        //public virtual async Task<List<T>> GetInActiveAsync()
-        //{
-        //    try
-        //    {
+        public virtual async Task<List<T>> GetActiveAsync()
+        {
+            try
+            {
 
-        //        var dbrResult = await _dbSet.AsNoTracking()
-        //                                        .Where(x => x.IsActive == false)
-        //                                        .ToListAsync();
-        //        return dbrResult;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+                var dbrResult = await _dbSet.AsNoTracking()
+                                                .Where(x => x.IsActive == true)
+                                                .ToListAsync();
+                return dbrResult;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public virtual async Task<List<T>> GetInActiveAsync()
+        {
+            try
+            {
+
+                var dbrResult = await _dbSet.AsNoTracking()
+                                                .Where(x => x.IsActive == false)
+                                                .ToListAsync();
+                return dbrResult;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public virtual async Task<List<T>> GetBatchAsync(List<string> entityIds)
         {

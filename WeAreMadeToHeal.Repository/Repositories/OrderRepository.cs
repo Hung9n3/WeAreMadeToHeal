@@ -8,27 +8,28 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal
 {
-    public class ImageRepository : BaseRepository<Image>, IImageRepository
+    public class OrderRepository : BaseRepository<Order>, IOrderRepository
     {
-        public ImageRepository(WRMTHDbContext context) : base(context)
+        public OrderRepository(WRMTHDbContext context) : base(context)
         {
-            
+           
         }
 
 
         #region [Custom Method Return Single]
+
         #endregion
 
         #region [Custom Method Return List]
-        public async Task<List<Image>> GetByProductAsync(string productId)
+        public async Task<List<Order>> GetByUserAsync(string userId)
         {
             try
             {
-                Guard.Argument(productId, nameof(productId));
+                Guard.Argument(userId, nameof(userId));
 
 
                 var dbResult = await _dbSet.AsNoTracking()
-                                                .Where(x => x.ProductId == productId).ToListAsync();
+                                                .Where(x => x.UserId == userId && x.IsActive).ToListAsync();
                 return dbResult;
 
             }
