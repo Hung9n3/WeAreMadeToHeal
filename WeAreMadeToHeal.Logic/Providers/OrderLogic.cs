@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal;
 
-public class ImageLogic : BaseLogic<Image, IImageRepository>, IImageLogic
+public class OrderLogic : BaseLogic<Order, IOrderRepository>, IOrderLogic
 {
-    public ImageLogic(IImageRepository dataProvider) : base(dataProvider)
+    public OrderLogic(IOrderRepository dataProvider) : base(dataProvider)
     {
         
     }
-
     #region [Custom Method Return Single]
+
     #endregion
 
     #region [Custom Method Return List]
-    public Task<List<Image>> GetByProductAsync(string productId)
+    public Task<List<Order>> GetByUserAsync(string userId)
     {
-        Guard.Argument(productId, nameof(productId));
-        var result = _dataProvider.GetByProductAsync(productId);
+        Guard.Argument(userId, nameof(userId));
+        var result = _dataProvider.GetByUserAsync(userId);
         return result;
     }
     #endregion

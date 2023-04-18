@@ -77,6 +77,18 @@ namespace WeAreMadeToHeal
             return dataProvider.GetActiveOrInActiveAsync(isActive);
         }
 
+        public virtual Task<List<T>> GetActiveAsync()
+        {
+            TDb dataProvider = _dataProvider;
+            return dataProvider.GetActiveAsync();
+        }
+
+        public virtual Task<List<T>> GetInActiveAsync()
+        {
+            TDb dataProvider = _dataProvider;
+            return dataProvider.GetInActiveAsync();
+        }
+
         public virtual Task<List<T>> GetBatchAsync(List<string> entityIds)
         {
             TDb dataProvider = _dataProvider;

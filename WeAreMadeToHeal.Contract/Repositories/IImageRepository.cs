@@ -8,5 +8,6 @@ namespace WeAreMadeToHeal
 {
     public interface IImageRepository : IBaseRepository<Image>
     {
+        Task<List<Image>> GetByProductAsync(string productId);
     }
 }

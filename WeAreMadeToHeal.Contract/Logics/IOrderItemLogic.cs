@@ -8,5 +8,6 @@ namespace WeAreMadeToHeal
 {
     public interface IOrderItemLogic : IBaseLogicProvider<OrderItem>
     {
+        Task<List<OrderItem>> GetByOrderAsync(string orderId);
     }
 }

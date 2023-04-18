@@ -8,5 +8,6 @@ namespace WeAreMadeToHeal
 {
     public interface ICouponRepository : IBaseRepository<Coupon>
     {
+        Task<List<Coupon>> GetByUserAsync(string userId);
     }
 }

@@ -8,7 +8,8 @@ namespace WeAreMadeToHeal
 {
     public class BankCard : BaseEntity
     {
-        public string BankName { get; set; }
+        public string BankFullName { get; set; }
+        public string BankShortName { get; set; }
         public string UserId { get; set; }
         public string OwnerName { get; set; }
         public string Number { get; set; }

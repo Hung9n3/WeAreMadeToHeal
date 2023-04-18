@@ -93,7 +93,7 @@ namespace WeAreMadeToHeal.Customer
             try
             {
                 var result = await this._logic.GetAsync(id).ConfigureAwait(false);
-                if (result == null)
+                if (result == null || result.IsActive == false)
                 {
                     return base.NotFound(result);
                 }

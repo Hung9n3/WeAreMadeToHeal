@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal
 {
-    public class OrderItem : BaseEntity
+    public class Order : BaseEntity
     {
-        public string ProductId { get; set; }
-        public string OrderId { get; set; }
+        public string UserId { get; set; }
         public double TotalPrice { get; set; }
-        public int Amount { get; set; }
+        public DateTime? DepartDate { get; set; }
+        public DateTime? ArriveDate { get; set; }
     }
 }

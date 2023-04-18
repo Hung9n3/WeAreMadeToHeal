@@ -8,5 +8,7 @@ namespace WeAreMadeToHeal
 {
     public interface ICouponLogic : IBaseLogicProvider<Coupon>
     {
+        Task<List<Coupon>> GetByUserAsync(string userId);
+
     }
 }

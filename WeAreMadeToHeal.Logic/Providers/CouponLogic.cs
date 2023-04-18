@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawn;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,18 @@ public class CouponLogic : BaseLogic<Coupon, ICouponRepository>, ICouponLogic
 {
     public CouponLogic(ICouponRepository dataProvider) : base(dataProvider)
     {
-        #region [Custom Method Return Single]
-        #endregion
-
-        #region [Custom Method Return List]
-        #endregion
+        
     }
+
+    public Task<List<Coupon>> GetByUserAsync(string userId)
+    {
+        Guard.Argument(userId, nameof(userId));
+        var result = _dataProvider.GetByUserAsync(userId);
+        return result;
+    }
+    #region [Custom Method Return Single]
+    #endregion
+
+    #region [Custom Method Return List]
+    #endregion
 }

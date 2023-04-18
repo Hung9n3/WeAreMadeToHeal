@@ -131,25 +131,5 @@ namespace WeAreMadeToHeal
             }
         }
         #endregion
-
-        #region [ Custom Method Override ]
-        public override async Task<User> GetAsync(string id)
-        {
-            try
-            {
-                Guard.Argument(id, nameof(id));
-
-
-                var dbResult = await _dbSet.AsNoTracking().Where(x => x.Id == id && x.IsActive == true)
-                                                          .FirstOrDefaultAsync();
-                return dbResult;
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        #endregion
     }
 }

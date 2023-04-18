@@ -8,5 +8,7 @@ namespace WeAreMadeToHeal
 {
     public interface IBankCardLogic : IBaseLogicProvider<BankCard>
     {
+        Task<BankCard> GetByUserAsync(string userId);
+
     }
 }

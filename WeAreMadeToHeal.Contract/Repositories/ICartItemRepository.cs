@@ -8,5 +8,6 @@ namespace WeAreMadeToHeal
 {
     public interface ICartItemRepository : IBaseRepository<CartItem>
     {
+        Task<List<CartItem>> GetByUserAsync(string userId);
     }
 }

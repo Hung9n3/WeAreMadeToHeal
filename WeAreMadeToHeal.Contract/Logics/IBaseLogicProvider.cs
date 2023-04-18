@@ -22,6 +22,9 @@ namespace WeAreMadeToHeal
 
         Task<List<T>> GetActiveOrInActiveAsync(bool isActive);
 
+        Task<List<T>> GetActiveAsync();
+
+        Task<List<T>> GetInActiveAsync();
 
         Task<List<T>> GetBatchAsync(List<string> entityIds);
 
