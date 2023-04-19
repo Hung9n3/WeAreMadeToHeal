@@ -13,11 +13,18 @@ public class OrderLogic : BaseLogic<Order, IOrderRepository>, IOrderLogic
     {
         
     }
+
+
     #region [Custom Method Return Single]
 
     #endregion
 
     #region [Custom Method Return List]
+    public Task<List<Order>> GetByTimeInterval(DateTime startTime, DateTime endTime)
+    {
+        var result = _dataProvider.GetByTimeInterval(startTime,endTime);
+        return result;
+    }
     public Task<List<Order>> GetByUserAsync(string userId)
     {
         Guard.Argument(userId, nameof(userId));

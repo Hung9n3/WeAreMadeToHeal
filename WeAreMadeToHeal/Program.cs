@@ -14,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+//Dbcontext
+//builder.Services.AddDbContext<WRMTHDbContext>(options =>
+//                                    options.UseSqlServer
+//                                    (builder.Configuration.GetConnectionString("LocalConnection")), ServiceLifetime.Scoped);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -48,43 +52,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("ApplicationSettings"));
-builder.Services.AddDbContext<WRMTHDbContext>(options =>
-                                    options.UseSqlServer
-                                    (builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddIdentity<User, Role>(options => {
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 1;
-})
-        .AddEntityFrameworkStores<WRMTHDbContext>()
-        .AddDefaultTokenProviders();
-
-//Jwt Auth
-
-var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"].ToString());
-
-builder.Services.AddAuthentication(x =>
-{
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
-{
-    x.RequireHttpsMetadata = false;
-    x.SaveToken = false;
-    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ClockSkew = TimeSpan.Zero
-    };
-});
-
 builder.Services.AddApiVersioning(opt =>
 {
     opt.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
@@ -107,8 +74,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-   
+ 
 }
+app.SeedDataMiddleWare();
+
 app.UseSwagger();
 
 app.UseSwaggerUI();

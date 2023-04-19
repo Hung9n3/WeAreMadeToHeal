@@ -26,7 +26,7 @@ namespace WeAreMadeToHeal
             {
                 Guard.Argument(productId, nameof(productId));
 
-                var tagIds = await _context.TagsProduct.Where(x => x.ProductId == productId).Select(x => x.TagId).ToListAsync();
+                var tagIds = await _context.TagProducts.Where(x => x.ProductId == productId).Select(x => x.TagId).ToListAsync();
                 if (tagIds.Count == 0)
                 {
                     return null;

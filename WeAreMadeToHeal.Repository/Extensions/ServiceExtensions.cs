@@ -13,6 +13,8 @@ namespace WeAreMadeToHeal
         public static void AddRepository(this IServiceCollection services)
         {
             services.AddScoped<RepositoryContext>();
+            services.AddScoped<DatabaseProvider>();
+
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITagRepository, TagRepository>();

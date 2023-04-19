@@ -16,7 +16,6 @@ namespace WeAreMadeToHeal
         {
             var connectionStringKey = "LocalConnection";
             var connectionString = configuration.GetConnectionString(connectionStringKey);
-            Guard.Argument(connectionString, $"Connection string {connectionStringKey} is not set.");
 
             var options = new DbContextOptions<WRMTHDbContext>();
             var builder = new DbContextOptionsBuilder<WRMTHDbContext>(options);
@@ -29,6 +28,8 @@ namespace WeAreMadeToHeal
                 });
                 options.EnableSensitiveDataLogging();
             });
+
+
         }
     }
 }

@@ -15,6 +15,8 @@ namespace WeAreMadeToHeal
            
         }
 
+        
+
 
         #region [Custom Method Return Single]
 
@@ -30,6 +32,21 @@ namespace WeAreMadeToHeal
 
                 var dbResult = await _dbSet.AsNoTracking()
                                                 .Where(x => x.UserId == userId && x.IsActive).ToListAsync();
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<Order>> GetByTimeInterval(DateTime startTime, DateTime endTime)
+        {
+            try
+            {
+                var dbResult = await _dbSet.AsNoTracking()
+                                                .Where(x => x.CreatedAt >= startTime && x.CreatedAt <= endTime).ToListAsync();
                 return dbResult;
 
             }
