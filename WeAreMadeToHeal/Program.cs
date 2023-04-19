@@ -1,17 +1,19 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Data;
+using System.Text;
 using WeAreMadeToHeal;
+using WeAreMadeToHeal.Helpers.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-//DbContext
-//builder.Services.AddDbContext<WRMTHDbContext>(optionsAction: options =>
-//        options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -44,6 +46,43 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
+});
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("ApplicationSettings"));
+builder.Services.AddDbContext<WRMTHDbContext>(options =>
+                                    options.UseSqlServer
+                                    (builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<User, Role>(options => {
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 1;
+})
+        .AddEntityFrameworkStores<WRMTHDbContext>()
+        .AddDefaultTokenProviders();
+
+//Jwt Auth
+
+var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"].ToString());
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = false;
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
 });
 
 builder.Services.AddApiVersioning(opt =>
