@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Dawn;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -21,51 +22,34 @@ namespace WeAreMadeToHeal.Controllers.Auth
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private UserManager<User> _userManager { get; set; }
-        private RoleManager<Role> _roleManager { get; set; }
-        private readonly AppSettings _appSettings;
-        private WRMTHDbContext _context { get; set; }
-        public AuthController(UserManager<User> user, RoleManager<Role> role, WRMTHDbContext context, IOptions<AppSettings> appSettings)
+        protected readonly ILogger<AuthController> _logger;
+        private IAuthenticationLogic _logic { get; set; }
+        public AuthController( IAuthenticationLogic logic, ILogger<AuthController> logger)
         {
-            _userManager = user;
-            _roleManager = role;
-            _appSettings = appSettings.Value;
-            _context = context;
+            _logic = logic;
+            _logger = logger;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(User loginModel)
+        public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var user = await _userManager.FindByNameAsync(loginModel.Username);
-            IList<string> role = await _userManager.GetRolesAsync(user);
-            IList<Claim> Claims = await _userManager.GetClaimsAsync(user);
-            if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
+            Guard.Argument(loginModel.Username, nameof(loginModel.Username));
+            Guard.Argument(loginModel.Password, nameof(loginModel.Password));
+            try
             {
-                List<Claim> claims = new List<Claim> {
-                    new Claim("UserId", user.Id.ToString()),
-                };
-                foreach (string r in role)
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, r));
-                };
-                foreach (Claim c in Claims)
-                {
-                    claims.Add(c);
-                };
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(claims),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.SecretKey)), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                var token = tokenHandler.WriteToken(securityToken);
-                return Ok(new { token });
+                
+                var result = await this._logic.Login(loginModel.Username, loginModel.Password).ConfigureAwait(false);
+                return base.Ok(result);
             }
-            else
+            catch (ArgumentNullException ex)
             {
-                return BadRequest(new { message = "Username or password is incorrect" });
+                this._logger.LogError(ex, "Error in {0}", "");
+                return base.BadRequest();
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex, "Error in {0}", "");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
     }

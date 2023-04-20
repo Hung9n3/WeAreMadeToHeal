@@ -83,7 +83,7 @@ public class SeedProvider
             Id = "1",
             Email = "chovameo352@gmail.com",
             Name = "customer 1",
-            Username = "admin",
+            Username = "customer1",
             Role = UserRoles.Customer,
             Password = "string",
         });
@@ -93,7 +93,7 @@ public class SeedProvider
             Id = "2",
             Email = "skvuahung1@gmail.com",
             Name = "customer 2",
-            Username = "customer",
+            Username = "customer2",
             Role = UserRoles.Customer,
             Password = "string",
         });

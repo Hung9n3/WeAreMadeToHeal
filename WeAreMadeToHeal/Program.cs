@@ -8,6 +8,7 @@ using System.Data;
 using System.Text;
 using WeAreMadeToHeal;
 using WeAreMadeToHeal.Helpers.Auth;
+using WeAreMadeToHeal.Helpers.Auth.Authorize;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,10 @@ builder.Services.AddApiVersioning(opt =>
                                                     new HeaderApiVersionReader("x-api-version"),
                                                     new MediaTypeApiVersionReader("x-api-version"));
 });
+
+//Auth
+builder.Services.AddJwtBearer(builder.Configuration);
+builder.Services.AddPolicy();
 
 //Data
 builder.Services.AddWRMTHDbContext(builder.Configuration);

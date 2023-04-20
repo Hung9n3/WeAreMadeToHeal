@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WeAreMadeToHeal
 {
     [ApiController]
+    //[Authorize(Roles = "Admin")]
     [Route("api/v{version:apiVersion}/admin/[controller]")]
     [ApiVersion("1.0")]
     public abstract class BaseAdminController<T, TLogic> : ControllerBase where T : BaseEntity where TLogic : IBaseLogicProvider<T>

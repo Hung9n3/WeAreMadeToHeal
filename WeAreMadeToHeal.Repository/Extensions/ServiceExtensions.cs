@@ -26,7 +26,7 @@ namespace WeAreMadeToHeal
             services.AddTransient<IBankCardRepository, BankCardRepository>();
             services.AddTransient<IOrderItemRepository, OrderItemRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
-
+            services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         }
         public static void AddRepository(this IServiceCollection services, IConfiguration configuration)
         {
