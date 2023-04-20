@@ -21,9 +21,10 @@ namespace WeAreMadeToHeal
         public DbSet<Category> Categories { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<BankCard>  BankCards { get; set; }
         public DbSet<Product > Products { get; set; }
-        public DbSet<TagProduct> TagsProduct { get; set; }
+        public DbSet<TagProduct> TagProducts { get; set; }
         public DbSet<CouponUser> CouponUsers { get; set; }
         #region [ Public Overridden Methods ]
         public override int SaveChanges()

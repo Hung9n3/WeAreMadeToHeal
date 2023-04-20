@@ -1,63 +1,14 @@
 ﻿using Dawn;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WeAreMadeToHeal.Customer
+namespace WeAreMadeToHeal.Admin
 {
-    public class OrderController : BaseCustomerController<Order, IOrderLogic>
+    public class OrderController : BaseAdminController<Order, IOrderLogic>
     {
-        public OrderController(ILogger<BaseCustomerController<Order, IOrderLogic>> logger, LogicContext logicContext, IOrderLogic logic) : base(logger, logicContext, logic)
+        public OrderController(ILogger<BaseAdminController<Order, IOrderLogic>> logger, LogicContext logicContext, IOrderLogic logic) : base(logger, logicContext, logic)
         {
         }
-
-        #region [ Public Methods - Add | Update | Delete ]
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> AddAsync([FromBody] Order entity)
-        {
-            try
-            {
-                await this._logic.AddAsync(entity).ConfigureAwait(false);
-                return base.Ok();
-            }
-            catch (ArgumentNullException ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return base.BadRequest();
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
-        }
-
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> UpdateAsync([FromBody] Order entity)
-        {
-            try
-            {
-                await this._logic.UpdateAsync(entity).ConfigureAwait(false);
-                return base.Ok();
-            }
-            catch (ArgumentNullException ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return base.BadRequest();
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
-        }
-        #endregion
-
-        #region [ Custom Methods - Single ]
+        #region [ Custom Methods - List ]
         [HttpGet("{startDate}/{endDate}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -85,7 +36,7 @@ namespace WeAreMadeToHeal.Customer
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
-
+        
         [HttpGet("userId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -13,6 +13,8 @@ namespace WeAreMadeToHeal
         public static void AddRepository(this IServiceCollection services)
         {
             services.AddScoped<RepositoryContext>();
+            services.AddScoped<DatabaseProvider>();
+
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
@@ -24,7 +26,7 @@ namespace WeAreMadeToHeal
             services.AddTransient<IBankCardRepository, BankCardRepository>();
             services.AddTransient<IOrderItemRepository, OrderItemRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
-
+            services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         }
         public static void AddRepository(this IServiceCollection services, IConfiguration configuration)
         {

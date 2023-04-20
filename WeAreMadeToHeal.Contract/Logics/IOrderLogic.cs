@@ -9,5 +9,7 @@ namespace WeAreMadeToHeal
     public interface IOrderLogic : IBaseLogicProvider<Order>
     {
         Task<List<Order>> GetByUserAsync(string userId);
+        Task<List<Order>> GetByTimeInterval(DateTime startTime, DateTime endTime);
+
     }
 }

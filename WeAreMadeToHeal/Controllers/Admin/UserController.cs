@@ -13,7 +13,7 @@ namespace WeAreMadeToHeal.Admin
         #endregion
 
         #region [ Custom Method Return Single ]
-        [HttpGet("/{username}/{email}")]
+        [HttpGet("{username}/{email}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -50,7 +50,7 @@ namespace WeAreMadeToHeal.Admin
         #endregion
 
         #region [Custom Method Return List]
-        [HttpGet("/email/{isConfirmed}")]
+        [HttpGet("email/{isConfirmed}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -79,7 +79,7 @@ namespace WeAreMadeToHeal.Admin
             }
         }
 
-        [HttpGet("/phone/{isConfirmed}")]
+        [HttpGet("phone/{isConfirmed}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -108,7 +108,7 @@ namespace WeAreMadeToHeal.Admin
             }
         }
 
-        [HttpGet("/name/{name}")]
+        [HttpGet("name/{name}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -137,7 +137,7 @@ namespace WeAreMadeToHeal.Admin
             }
         }
 
-        [HttpGet("/role/{role}")]
+        [HttpGet("role/{role}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

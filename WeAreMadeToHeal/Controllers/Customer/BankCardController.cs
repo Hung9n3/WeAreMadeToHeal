@@ -1,4 +1,6 @@
 ﻿using Dawn;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WeAreMadeToHeal.Customer
@@ -81,13 +83,14 @@ namespace WeAreMadeToHeal.Customer
         #endregion
 
         #region [ Public Methods - Single ]
-        [HttpGet("userId")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> GetByUserAsync(string userId)
+        public virtual async Task<IActionResult> GetByUserAsync()
         {
+            var userId = User.Claims.First(c => c.Type == "UserId").Value;
             Guard.Argument(userId, nameof(userId));
             try
             {

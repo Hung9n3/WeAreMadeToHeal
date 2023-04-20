@@ -1,17 +1,24 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Data;
+using System.Text;
 using WeAreMadeToHeal;
+using WeAreMadeToHeal.Helpers.Auth;
+using WeAreMadeToHeal.Helpers.Auth.Authorize;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-//DbContext
-//builder.Services.AddDbContext<WRMTHDbContext>(optionsAction: options =>
-//        options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+//Dbcontext
+//builder.Services.AddDbContext<WRMTHDbContext>(options =>
+//                                    options.UseSqlServer
+//                                    (builder.Configuration.GetConnectionString("LocalConnection")), ServiceLifetime.Scoped);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -56,6 +63,10 @@ builder.Services.AddApiVersioning(opt =>
                                                     new MediaTypeApiVersionReader("x-api-version"));
 });
 
+//Auth
+builder.Services.AddJwtBearer(builder.Configuration);
+builder.Services.AddPolicy();
+
 //Data
 builder.Services.AddWRMTHDbContext(builder.Configuration);
 builder.Services.AddRepository();
@@ -68,8 +79,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-   
+ 
 }
+app.SeedDataMiddleWare();
+
 app.UseSwagger();
 
 app.UseSwaggerUI();

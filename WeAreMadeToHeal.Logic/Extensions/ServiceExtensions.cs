@@ -23,6 +23,8 @@ namespace WeAreMadeToHeal
             services.AddTransient<IBankCardLogic, BankCardLogic>();
             services.AddTransient<IOrderItemLogic, OrderItemLogic>();
             services.AddTransient<IImageLogic, ImageLogic>();
+            services.AddTransient<IAuthenticationLogic, AuthenticationLogic>();
+
         }
     }
 }
