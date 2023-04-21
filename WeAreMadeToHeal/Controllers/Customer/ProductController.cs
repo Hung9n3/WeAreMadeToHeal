@@ -1,4 +1,5 @@
 ﻿using Dawn;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WeAreMadeToHeal.Customer
@@ -11,6 +12,7 @@ namespace WeAreMadeToHeal.Customer
 
         #region [Custom Method Return Single]
         [HttpGet("{id}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -41,6 +43,7 @@ namespace WeAreMadeToHeal.Customer
 
         #region [Custom Method Return List]
         [HttpGet("category/{cateId}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -70,6 +73,7 @@ namespace WeAreMadeToHeal.Customer
         }
 
         [HttpGet("tag/{tagId}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -100,6 +104,7 @@ namespace WeAreMadeToHeal.Customer
         }
 
         [HttpGet("color/{colorCode}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -130,6 +135,7 @@ namespace WeAreMadeToHeal.Customer
         }
 
         [HttpGet("size/{size}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -160,6 +166,7 @@ namespace WeAreMadeToHeal.Customer
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -187,6 +194,7 @@ namespace WeAreMadeToHeal.Customer
             }
         }
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

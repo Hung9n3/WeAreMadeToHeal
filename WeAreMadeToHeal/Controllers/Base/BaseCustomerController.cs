@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace WeAreMadeToHeal
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/customer/[controller]")]
     [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/customer/[controller]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public abstract class BaseCustomerController<T, TLogic> : ControllerBase where T : BaseEntity where TLogic : IBaseLogicProvider<T>
     {
         #region [ Fields ]
