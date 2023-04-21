@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WeAreMadeToHeal.Customer
 {
@@ -10,6 +11,7 @@ namespace WeAreMadeToHeal.Customer
 
         #region [ Public Methods - Single ]
         [HttpGet("{id}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -40,6 +42,7 @@ namespace WeAreMadeToHeal.Customer
 
         #region [ Public Methods - List ]
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -67,6 +70,7 @@ namespace WeAreMadeToHeal.Customer
             }
         }
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -98,6 +102,7 @@ namespace WeAreMadeToHeal.Customer
 
         #region [ Public Custom Methods - List ]
         [HttpGet("user/{userId}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
