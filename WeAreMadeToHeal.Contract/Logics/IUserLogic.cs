@@ -7,7 +7,7 @@ using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal
 {
-    public interface IUserLogic : IBaseLogicProvider<User>
+    public interface IUserLogic
     {
         Task<User> GetByUsernameOrEmail(string payload);
 

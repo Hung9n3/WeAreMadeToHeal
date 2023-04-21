@@ -5,7 +5,7 @@ using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal
 {
-    public class User : BaseEntity
+    public class User : IdentityUser
     {
         public string Email { get; set; }
         public string Name { get; set; }

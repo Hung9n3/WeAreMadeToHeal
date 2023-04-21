@@ -9,14 +9,19 @@ using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : IUserRepository
     {
-        public UserRepository(WRMTHDbContext context) : base(context)
+        private readonly WRMTHDbContext _context;
+        private readonly DbSet<User> _dbSet;
+
+        public UserRepository(WRMTHDbContext context)
         {
+            _context = context;
+            _dbSet = _context.Users;
         }
 
         #region [ Public Method Override ]
-        public override async Task<User> GetAsync(string id)
+        public  async Task<User> GetAsync(string id)
         {
             try
             {

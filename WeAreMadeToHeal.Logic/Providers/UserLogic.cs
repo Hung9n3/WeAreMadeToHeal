@@ -1,4 +1,5 @@
 ﻿using Dawn;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,61 +9,74 @@ using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal;
 
-public class UserLogic : BaseLogic<User, IUserRepository>, IUserLogic
+public class UserLogic : IUserLogic
 {
-    public UserLogic(IUserRepository dataProvider) : base(dataProvider)
+    private readonly UserManager<User> _userManager;
+    public UserLogic(UserManager<User> userManager)
     {
-    }
-
-    #region [ Custom Method Void ]
-    #endregion
-
-    #region [ Custom Method Return Single ]
-    public Task<User> GetByUsernameOrEmail(string payload)
-    {
-        Guard.Argument(payload, "GetAsync");
-        if(payload.Contains("@"))
-        {
-            var result = _dataProvider.GetByEmail(payload);
-            return result;
-        }
-        else
-        {
-            var result = _dataProvider.GetByUsername(payload);
-            return result;
-        }
-    }
-
-    #endregion
-
-    #region [Custom Method Return List]
-    public Task<List<User>> GetUnConfirmOrConfirmedEmail(bool isConfirm)
-    {
-        Guard.Argument(isConfirm, nameof(isConfirm));
-        var result = _dataProvider.GetUnConfirmOrConfirmedEmail(isConfirm);
-        return result;
-    }
-
-    public Task<List<User>> GetUnConfirmOrConfirmedPhone(bool isConfirm)
-    {
-        Guard.Argument(isConfirm, nameof(isConfirm));
-        var result = _dataProvider.GetUnConfirmOrConfirmedPhone(isConfirm);
-        return result;
+        _userManager = userManager;
     }
 
     public Task<List<User>> GetByName(string name)
     {
-        Guard.Argument(name, nameof(name));
-        var result = _dataProvider.GetByName(name);
-        return result;
+        throw new NotImplementedException();
     }
 
     public Task<List<User>> GetByRole(UserRoles role)
     {
-        Guard.Argument(role, nameof(role));
-        var result = _dataProvider.GetByRole(role);
-        return result;
+        throw new NotImplementedException();
     }
+
+    public Task<User> GetByUsernameOrEmail(string payload)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<User>> GetUnConfirmOrConfirmedEmail(bool isConfirm)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<User>> GetUnConfirmOrConfirmedPhone(bool isConfirm)
+    {
+        throw new NotImplementedException();
+    }
+
+    #region [ Method List ]
+    //public async Task<List<User>> GetAll()
+    //{
+
+    //}
+    //#endregion
+
+    //#region [ Method Return Single ]
+    //public Task<User> GetByUsernameOrEmail(string payload)
+    //{
+    //    Guard.Argument(payload, "GetAsync");
+    //}
+
+    //#endregion
+
+    //#region [Custom Method Return List]
+    //public Task<List<User>> GetUnConfirmOrConfirmedEmail(bool isConfirm)
+    //{
+    //    Guard.Argument(isConfirm, nameof(isConfirm));
+    //}
+
+    //public Task<List<User>> GetUnConfirmOrConfirmedPhone(bool isConfirm)
+    //{
+    //    Guard.Argument(isConfirm, nameof(isConfirm));
+    //}
+
+    //public Task<List<User>> GetByName(string name)
+    //{
+    //    Guard.Argument(name, nameof(name));
+    //}
+
+    //public Task<List<User>> GetByRole(UserRoles role)
+    //{
+    //    Guard.Argument(role, nameof(role));
+    //}
     #endregion
 
 }

@@ -3,10 +3,18 @@ using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal.Admin
 {
-    public class UserController : BaseAdminController<User, IUserLogic>
+    [ApiController]
+    //[Authorize(Roles = "Admin")]
+    [Route("api/v{version:apiVersion}/admin/[controller]")]
+    [ApiVersion("1.0")]
+    public class UserController : ControllerBase
     {
-        public UserController(ILogger<BaseAdminController<User, IUserLogic>> logger, LogicContext logicContext, IUserLogic logic) : base(logger, logicContext, logic)
+        private readonly IUserLogic _logic;
+        private ILogger<UserController> _logger;
+        public UserController(IUserLogic logic, ILogger<UserController> logger)
         {
+            _logic = logic;
+            _logger = logger;
         }
 
         #region [ Custom Method Void ]
