@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal
@@ -16,5 +17,9 @@ namespace WeAreMadeToHeal
         public bool PhoneNumberConfirmed { get; set; } = false;
         public UserRoles Role { get; set; }
         public string Address { get; set; } = string.Empty;
+        public Order Order { get; set; }
+        public BankCard BankCard { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<CouponUser> CouponUsers { get; set; }
     }
 }

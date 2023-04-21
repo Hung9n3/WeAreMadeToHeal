@@ -14,6 +14,41 @@ namespace WeAreMadeToHeal
         {
             
         }
+
+        #region [Public Method Override]
+        public override async Task<List<Product>> GetAllAsync()
+        {
+            try
+            { 
+                var dbResult = await _dbSet.Include(x => x.Images).AsNoTracking()
+                                                .ToListAsync();
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public override async Task<Product> GetAsync(string id)
+        {
+            try
+            {
+                Guard.Argument(id, nameof(id));
+
+                var dbResult = await _dbSet.Include(x => x.Images).AsNoTracking()
+                                                .FirstOrDefaultAsync(x => x.Id == id);
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        #endregion
+
         #region [Custom Method Return Single]
         #endregion
 
