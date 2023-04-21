@@ -12,5 +12,6 @@ namespace WeAreMadeToHeal
         public double TotalPrice { get; set; }
         public DateTime? DepartDate { get; set; }
         public DateTime? ArriveDate { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set;}
     }
 }

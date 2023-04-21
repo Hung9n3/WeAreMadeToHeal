@@ -44,6 +44,10 @@ namespace WeAreMadeToHeal
             }
             return base.SaveChanges();
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
         #endregion
     }
 }

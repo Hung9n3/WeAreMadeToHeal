@@ -16,5 +16,6 @@ namespace WeAreMadeToHeal
         public string MaxReduce { get; set; } = string.Empty;
         public double ReduceAmount { get; set; } = 0.0;
         public double ReduceRate { get; set; } = double.MinValue;
+        public ICollection<CouponUser> CouponUsers { get; set; }
     }
 }

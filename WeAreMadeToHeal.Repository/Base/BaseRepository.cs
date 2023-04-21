@@ -270,6 +270,22 @@ namespace WeAreMadeToHeal
                 throw new Exception(ex.Message);
             }
         }
+
+        public virtual async Task<List<string>> GetAllIds()
+        {
+            try
+            {
+
+                var dbResult = await _dbSet.AsNoTracking().Select(x => x.Id)
+                                            .ToListAsync();
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         #endregion
 
         #region [ Public Methods - Checks ]

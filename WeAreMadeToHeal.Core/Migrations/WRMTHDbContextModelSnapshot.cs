@@ -55,9 +55,13 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("BankCards");
                 });
@@ -83,9 +87,11 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CartItems");
                 });
@@ -164,7 +170,7 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CouponId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -176,9 +182,13 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CouponId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CouponUsers");
                 });
@@ -195,7 +205,7 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -204,6 +214,8 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Images");
                 });
@@ -232,9 +244,13 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Orders");
                 });
@@ -254,10 +270,10 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
@@ -266,6 +282,10 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
                 });
@@ -276,7 +296,7 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -303,6 +323,8 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -341,15 +363,19 @@ namespace WeAreMadeToHeal.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TagId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("TagId");
 
                     b.ToTable("TagProducts");
                 });
@@ -401,6 +427,122 @@ namespace WeAreMadeToHeal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.BankCard", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.User", null)
+                        .WithOne("BankCard")
+                        .HasForeignKey("WeAreMadeToHeal.BankCard", "UserId");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.CartItem", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.User", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.CouponUser", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.Coupon", "Coupon")
+                        .WithMany("CouponUsers")
+                        .HasForeignKey("CouponId");
+
+                    b.HasOne("WeAreMadeToHeal.User", "User")
+                        .WithMany("CouponUsers")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Coupon");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Image", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Order", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.User", null)
+                        .WithOne("Order")
+                        .HasForeignKey("WeAreMadeToHeal.Order", "UserId");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.OrderItem", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.Order", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("WeAreMadeToHeal.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Product", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.Category", null)
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.TagProduct", b =>
+                {
+                    b.HasOne("WeAreMadeToHeal.Product", "Product")
+                        .WithMany("TagProducts")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("WeAreMadeToHeal.Tag", "Tag")
+                        .WithMany("TagProducts")
+                        .HasForeignKey("TagId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Coupon", b =>
+                {
+                    b.Navigation("CouponUsers");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Product", b =>
+                {
+                    b.Navigation("Images");
+
+                    b.Navigation("TagProducts");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.Tag", b =>
+                {
+                    b.Navigation("TagProducts");
+                });
+
+            modelBuilder.Entity("WeAreMadeToHeal.User", b =>
+                {
+                    b.Navigation("BankCard");
+
+                    b.Navigation("CartItems");
+
+                    b.Navigation("CouponUsers");
+
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

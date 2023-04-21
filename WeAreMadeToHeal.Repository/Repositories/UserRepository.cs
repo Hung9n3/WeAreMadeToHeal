@@ -15,7 +15,24 @@ namespace WeAreMadeToHeal
         {
         }
 
-        #region [ Custom Method Void ]
+        #region [ Public Method Override ]
+        public override async Task<User> GetAsync(string id)
+        {
+            try
+            {
+                Guard.Argument(id, nameof(id));
+
+
+                var dbResult = await _dbSet.Include(x => x.BankCard).Include(x => x.CartItems).AsNoTracking()
+                                                .FirstOrDefaultAsync(x => x.Id == id);
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         #endregion
 
         #region [ Custom Method Return Single ]
@@ -26,7 +43,7 @@ namespace WeAreMadeToHeal
                 Guard.Argument(username, nameof(username));
 
 
-                var dbResult = await _dbSet.AsNoTracking()
+                var dbResult = await _dbSet.Include(x => x.BankCard).Include(x => x.CartItems).AsNoTracking()
                                                 .FirstOrDefaultAsync(x => x.Username == username);
                 return dbResult;
 
@@ -44,7 +61,7 @@ namespace WeAreMadeToHeal
                 Guard.Argument(email, nameof(email));
 
 
-                var dbResult = await _dbSet.AsNoTracking()
+                var dbResult = await _dbSet.Include(x => x.BankCard).Include(x => x.CartItems).AsNoTracking()
                                                 .FirstOrDefaultAsync(x => x.Email == email);
                 return dbResult;
 
