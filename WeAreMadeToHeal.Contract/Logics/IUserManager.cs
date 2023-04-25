@@ -7,11 +7,9 @@ using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal
 {
-    public interface IUserLogic
+    public interface IUserManager
     {
         Task AddAsync(User entity);
-
-        Task UpdateAsync(User entity);
 
         Task ActivateOrDeactiveAsync(string id, bool isActive);
 

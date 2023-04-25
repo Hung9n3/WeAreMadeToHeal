@@ -4,14 +4,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal;
 
-public class UserManager : UserManager<User>, IUserLogic
+public class UserManager : UserManager<User>, IUserManager
 {
     private readonly IUserRepository _repository;
     public UserManager(IUserStore<User> store,
@@ -33,12 +31,6 @@ public class UserManager : UserManager<User>, IUserLogic
     {
         Guard.Argument(entity, "AddAsync");
         return _repository.AddAsync(entity);
-    }
-
-    public virtual Task UpdateAsync(User entity)
-    {
-        Guard.Argument(entity, "UpdateAsync");
-        return _repository.UpdateAsync(entity);
     }
 
     public virtual Task ActivateOrDeactiveAsync(string id, bool isActive)

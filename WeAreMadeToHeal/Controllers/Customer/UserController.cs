@@ -5,10 +5,13 @@ namespace WeAreMadeToHeal.Customer
     public class UserController : ControllerBase
     {
         protected readonly ILogger<UserController> _logger;
-        protected readonly LogicContext _logicContext;
-        protected readonly IUserLogic _logic;
-        public UserController(ILogger<UserController> logger, LogicContext logicContext, IUserLogic logic)
+        protected readonly LogicContext _userManagerContext;
+        protected readonly UserManager _userManager;
+        public UserController(ILogger<UserController> logger, LogicContext logicContext, UserManager userManager)
         {
+            _logger = logger;
+            _userManagerContext = logicContext;
+            _userManager = userManager;
         }
 
         #region [ Public Methods - Add | Update | Delete ]
@@ -20,7 +23,7 @@ namespace WeAreMadeToHeal.Customer
         {
             try
             {
-                await this._logic.UpdateAsync(entity).ConfigureAwait(false);
+                await this._userManager.UpdateAsync(entity).ConfigureAwait(false);
                 return base.Ok();
             }
             catch (ArgumentNullException ex)
@@ -43,7 +46,7 @@ namespace WeAreMadeToHeal.Customer
         {
             try
             {
-                await this._logic.DeleteAsync(id).ConfigureAwait(false);
+                await this._userManager.DeleteAsync(id).ConfigureAwait(false);
                 return base.Ok();
             }
             catch (ArgumentNullException ex)
@@ -68,7 +71,7 @@ namespace WeAreMadeToHeal.Customer
         {
             try
             {
-                await this._logic.ActivateOrDeactiveAsync(id, isActive).ConfigureAwait(false);
+                await this._userManager.ActivateOrDeactiveAsync(id, isActive).ConfigureAwait(false);
                 return base.Ok();
             }
             catch (ArgumentNullException ex)
@@ -95,7 +98,7 @@ namespace WeAreMadeToHeal.Customer
         {
             try
             {
-                var result = await this._logic.GetAsync(id).ConfigureAwait(false);
+                var result = await this._userManager.GetAsync(id).ConfigureAwait(false);
                 if (result == null || result.IsActive == false)
                 {
                     return base.NotFound(result);
@@ -135,7 +138,7 @@ namespace WeAreMadeToHeal.Customer
                 }
                 else payload = email;
 
-                var result = await this._logic.GetByUsernameOrEmail(payload).ConfigureAwait(false);
+                var result = await this._userManager.GetByUsernameOrEmail(payload).ConfigureAwait(false);
                 if (result == null)
                 {
                     return base.NotFound(result);

@@ -43,6 +43,8 @@ namespace WeAreMadeToHeal.Helpers.Auth.Authorize
         {
            services.AddIdentity<User, Role>(options =>
             {
+                options.User.RequireUniqueEmail = true;
+
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
@@ -53,7 +55,7 @@ namespace WeAreMadeToHeal.Helpers.Auth.Authorize
                 options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddEntityFrameworkStores<WRMTHDbContext>()
-                .AddUserManager<UserManager<User>>()
+                .AddUserManager<UserManager>()
                 .AddDefaultTokenProviders();
         }
     }

@@ -13,7 +13,7 @@ namespace WeAreMadeToHeal
         {
             services.AddScoped<LogicContext>();
 
-            services.AddTransient<IUserLogic, UserLogic>();
+            services.AddTransient<IUserManager, UserLogic>();
             services.AddTransient<ITagLogic, TagLogic>();
             services.AddTransient<IProductLogic, ProductLogic>();
             services.AddTransient<ICouponUserLogic, CouponUserLogic>();

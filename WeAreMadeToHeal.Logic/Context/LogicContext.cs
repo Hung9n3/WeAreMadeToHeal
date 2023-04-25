@@ -8,7 +8,7 @@ namespace WeAreMadeToHeal
 {
     public class LogicContext
     {
-        public LogicContext(IImageLogic ImageLogic, IUserLogic UserLogic, ITagLogic TagLogic, ICouponLogic CouponLogic,
+        public LogicContext(IImageLogic ImageLogic, IUserManager UserLogic, ITagLogic TagLogic, ICouponLogic CouponLogic,
             ICouponUserLogic CouponUserLogic, ICartItemLogic CartItemLogic, ICategoryLogic CategoryLogic, IOrderItemLogic OrderItemLogic,
             IProductLogic ProductLogic, IBankCardLogic BankCardLogic)
         {
@@ -25,7 +25,7 @@ namespace WeAreMadeToHeal
         }
 
         public IImageLogic ImageLogic { get; }
-        public IUserLogic UserLogic { get; }
+        public IUserManager UserLogic { get; }
         public ITagLogic TagLogic { get; }
         public ICouponLogic CouponLogic { get; }
         public ICouponUserLogic CouponUserLogic { get; }

@@ -9,9 +9,9 @@ namespace WeAreMadeToHeal.Admin
     [ApiVersion("1.0")]
     public class UserController : ControllerBase
     {
-        private readonly IUserLogic _logic;
+        private readonly IUserManager _logic;
         private ILogger<UserController> _logger;
-        public UserController(IUserLogic logic, ILogger<UserController> logger)
+        public UserController(IUserManager logic, ILogger<UserController> logger)
         {
             _logic = logic;
             _logger = logger;
