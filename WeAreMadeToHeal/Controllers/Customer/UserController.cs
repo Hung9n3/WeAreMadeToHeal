@@ -2,6 +2,10 @@
 
 namespace WeAreMadeToHeal.Customer
 {
+    [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/customer/[controller]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UserController : ControllerBase
     {
         protected readonly ILogger<UserController> _logger;
@@ -38,15 +42,16 @@ namespace WeAreMadeToHeal.Customer
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> DeleteAsync(string id)
+        public virtual async Task<IActionResult> DeleteAsync()
         {
             try
             {
-                await this._userManager.DeleteAsync(id).ConfigureAwait(false);
+                var userId = User.Claims.First(c => c.Type == "UserId").Value;
+                await this._userManager.DeleteAsync(userId).ConfigureAwait(false);
                 return base.Ok();
             }
             catch (ArgumentNullException ex)
@@ -63,15 +68,16 @@ namespace WeAreMadeToHeal.Customer
         #endregion
 
         #region [ Public Methods - Activate ]
-        [HttpPut("{id}/{isActive}")]
+        [HttpPut("{isActive}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> ActivateOrDeactiveAsync(string id, bool isActive)
+        public virtual async Task<IActionResult> ActivateOrDeactiveAsync(bool isActive)
         {
             try
             {
-                await this._userManager.ActivateOrDeactiveAsync(id, isActive).ConfigureAwait(false);
+                var userId = User.Claims.First(c => c.Type == "UserId").Value;
+                await this._userManager.ActivateOrDeactiveAsync(userId, isActive).ConfigureAwait(false);
                 return base.Ok();
             }
             catch (ArgumentNullException ex)
@@ -89,16 +95,18 @@ namespace WeAreMadeToHeal.Customer
         #endregion
 
         #region [ Public Methods - Single ]
-        [HttpGet("{id}")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> GetAsync(string id)
+        public virtual async Task<IActionResult> GetAsync()
         {
             try
             {
-                var result = await this._userManager.GetAsync(id).ConfigureAwait(false);
+                var userId = User.Claims.First(c => c.Type == "UserId").Value;
+
+                var result = await this._userManager.GetAsync(userId).ConfigureAwait(false);
                 if (result == null || result.IsActive == false)
                 {
                     return base.NotFound(result);
@@ -121,44 +129,5 @@ namespace WeAreMadeToHeal.Customer
         #region [ Custom Method Void ]
         #endregion
 
-        #region [ Custom Method Return Single ]
-        [HttpGet("{username}/{email}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetByUsernameOrEmail(string username, string email)
-        {
-            try
-            {
-                string payload = "";
-                if (username != null)
-                {
-                    payload = username;
-                }
-                else payload = email;
-
-                var result = await this._userManager.GetByUsernameOrEmail(payload).ConfigureAwait(false);
-                if (result == null)
-                {
-                    return base.NotFound(result);
-                }
-                return base.Ok(result);
-            }
-            catch (ArgumentNullException ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return base.BadRequest();
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
-        }
-        #endregion
-
-        #region [ Custom Method Override]
-        #endregion
     }
 }

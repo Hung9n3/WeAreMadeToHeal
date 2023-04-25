@@ -8,17 +8,17 @@ namespace WeAreMadeToHeal
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/customer/[controller]")]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public abstract class BaseCustomerController<User, TLogic> : ControllerBase where User : BaseEntity where TLogic : IBaseLogicProvider<User>
+    public abstract class BaseCustomerController<TEntity, TLogic> : ControllerBase where TEntity : BaseEntity where TLogic : IBaseLogicProvider<TEntity>
     {
         #region [ Fields ]
-        protected readonly ILogger<BaseCustomerController<User, TLogic>> _logger;
+        protected readonly ILogger<BaseCustomerController<TEntity, TLogic>> _logger;
         protected readonly LogicContext _logicContext;
         protected readonly TLogic _logic;
         #endregion
 
         #region [ CTor ]
         public BaseCustomerController(
-            ILogger<BaseCustomerController<User, TLogic>> logger,
+            ILogger<BaseCustomerController<TEntity, TLogic>> logger,
             LogicContext logicContext,
             TLogic logic)
         {
