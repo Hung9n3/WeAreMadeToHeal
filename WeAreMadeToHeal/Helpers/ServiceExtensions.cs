@@ -3,9 +3,9 @@ using WeAreMadeToHeal.Helpers.Email;
 
 namespace WeAreMadeToHeal;
 
-public class ServiceExtensions
+public static class ServiceExtensions
 {
-    public static void ConfigureServices(IServiceCollection services)
+    public static void AddHelpers(this IServiceCollection services)
     {
         services.AddTransient<EmailConfig>();
         services.AddTransient<EmailHelper>();

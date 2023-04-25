@@ -6,7 +6,7 @@ namespace WeAreMadeToHeal.Customer
 {
     public class ProductController : BaseCustomerController<Product, IProductLogic>
     {
-        public ProductController(ILogger<BaseCustomerController<Product, IProductLogic>> logger, LogicContext logicContext, IProductLogic logic) : base(logger, logicContext, logic)
+        public ProductController(ILogger<BaseCustomerController<Product, IProductLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IProductLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

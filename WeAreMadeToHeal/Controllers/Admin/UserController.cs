@@ -41,28 +41,28 @@ namespace WeAreMadeToHeal.Admin
             }
         }
 
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> UpdateAsync([FromBody] User entity)
-        {
-            try
-            {
-                await this._logic.UpdateAsync(entity).ConfigureAwait(false);
-                return base.Ok();
-            }
-            catch (ArgumentNullException ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return base.BadRequest();
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error in {0}", "");
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
-        }
+        //[HttpPut]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public virtual async Task<IActionResult> UpdateAsync([FromBody] User entity)
+        //{
+        //    try
+        //    {
+        //        await this._logic.UpdateAsync(entity).ConfigureAwait(false);
+        //        return base.Ok();
+        //    }
+        //    catch (ArgumentNullException ex)
+        //    {
+        //        this._logger.LogError(ex, "Error in {0}", "");
+        //        return base.BadRequest();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this._logger.LogError(ex, "Error in {0}", "");
+        //        return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        //    }
+        //}
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

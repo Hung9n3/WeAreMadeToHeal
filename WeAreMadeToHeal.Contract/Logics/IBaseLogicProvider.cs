@@ -10,6 +10,8 @@ namespace WeAreMadeToHeal
     {
         Task AddAsync(TEntity entity);
 
+        Task SaveRangeAsync(List<TEntity> entity);
+
         Task UpdateAsync(TEntity entity);
 
         Task ActivateOrDeactiveAsync(string id, bool isActive);

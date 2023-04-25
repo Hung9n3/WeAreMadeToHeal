@@ -4,7 +4,7 @@ namespace WeAreMadeToHeal.Admin
 {
     public class CouponController : BaseAdminController<Coupon, ICouponLogic>
     {
-        public CouponController(ILogger<BaseAdminController<Coupon, ICouponLogic>> logger, LogicContext logicContext, ICouponLogic logic) : base(logger, logicContext, logic)
+        public CouponController(ILogger<BaseAdminController<Coupon, ICouponLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, ICouponLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

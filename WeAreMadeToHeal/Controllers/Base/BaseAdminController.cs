@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WeAreMadeToHeal.Helpers;
 
 namespace WeAreMadeToHeal
 {
     [ApiController]
     //[Authorize(Roles = "Admin")]
-    [Route("api/v{version:apiVersion}/admin/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiVersion("1.0")]
     public abstract class BaseAdminController<TEntity, TLogic> : ControllerBase where TEntity : BaseEntity where TLogic : IBaseLogicProvider<TEntity>
     {
         #region [ Fields ]
         protected readonly ILogger<BaseAdminController<TEntity, TLogic>> _logger;
+        protected readonly ExcelHandlerService _excelHandlerService;
         protected readonly LogicContext _logicContext;
         protected readonly TLogic _logic;
         #endregion
@@ -19,12 +21,14 @@ namespace WeAreMadeToHeal
         #region [ CTor ]
         public BaseAdminController(
             ILogger<BaseAdminController<TEntity, TLogic>> logger,
+            ExcelHandlerService excelHandlerService,
             LogicContext logicContext,
             TLogic logic)
         {
             this._logger = logger;
+            this._excelHandlerService = excelHandlerService;
             this._logicContext = logicContext;
-            _logic = logic;
+            this._logic = logic;
         }
         #endregion
 
@@ -38,6 +42,53 @@ namespace WeAreMadeToHeal
             try
             {
                 await this._logic.AddAsync(entity).ConfigureAwait(false);
+                return base.Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex, "Error in {0}", "");
+                return base.BadRequest();
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex, "Error in {0}", "");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost("excel")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public virtual async Task<IActionResult> SaveRangeFromExcelAsync([FromBody] IFormFile file)
+        {
+            try
+            {
+                var entities = (await _excelHandlerService.GetTable(file, default)).GetEntityFromDataTable<TEntity>();
+                await this._logic.SaveRangeAsync(entities).ConfigureAwait(false);
+                return base.Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex, "Error in {0}", "");
+                return base.BadRequest();
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex, "Error in {0}", "");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public virtual async Task<IActionResult> SaveRangeAsync([FromBody] List<TEntity> entity)
+        {
+            try
+            {
+                await this._logic.SaveRangeAsync(entity).ConfigureAwait(false);
                 return base.Ok();
             }
             catch (ArgumentNullException ex)

@@ -5,7 +5,7 @@ namespace WeAreMadeToHeal.Admin
 {
     public class ProductController : BaseAdminController<Product, IProductLogic>
     {
-        public ProductController(ILogger<BaseAdminController<Product, IProductLogic>> logger, LogicContext logicContext, IProductLogic logic) : base(logger, logicContext, logic)
+        public ProductController(ILogger<BaseAdminController<Product, IProductLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IProductLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

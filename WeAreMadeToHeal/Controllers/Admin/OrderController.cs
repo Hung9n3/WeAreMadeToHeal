@@ -5,7 +5,7 @@ namespace WeAreMadeToHeal.Admin
 {
     public class OrderController : BaseAdminController<Order, IOrderLogic>
     {
-        public OrderController(ILogger<BaseAdminController<Order, IOrderLogic>> logger, LogicContext logicContext, IOrderLogic logic) : base(logger, logicContext, logic)
+        public OrderController(ILogger<BaseAdminController<Order, IOrderLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IOrderLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
         #region [ Custom Methods - List ]

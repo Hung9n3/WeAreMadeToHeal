@@ -6,7 +6,7 @@ namespace WeAreMadeToHeal.Admin
 {
     public class TagController : BaseAdminController<Tag, ITagLogic>
     {
-        public TagController(ILogger<BaseAdminController<Tag, ITagLogic>> logger, LogicContext logicContext, ITagLogic logic) : base(logger, logicContext, logic)
+        public TagController(ILogger<BaseAdminController<Tag, ITagLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, ITagLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

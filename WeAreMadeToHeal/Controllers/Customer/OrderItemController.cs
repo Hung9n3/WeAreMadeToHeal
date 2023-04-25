@@ -4,7 +4,7 @@ namespace WeAreMadeToHeal.Customer
 {
     public class OrderItemController : BaseCustomerController<OrderItem, IOrderItemLogic>
     {
-        public OrderItemController(ILogger<BaseCustomerController<OrderItem, IOrderItemLogic>> logger, LogicContext logicContext, IOrderItemLogic logic) : base(logger, logicContext, logic)
+        public OrderItemController(ILogger<BaseCustomerController<OrderItem, IOrderItemLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IOrderItemLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

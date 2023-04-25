@@ -65,7 +65,11 @@ builder.Services.AddApiVersioning(opt =>
 
 //Auth
 builder.Services.AddJwtBearer(builder.Configuration);
+builder.Services.AddIdentity();
 builder.Services.AddPolicy();
+
+//Helper
+builder.Services.AddHelpers();
 
 //Data
 builder.Services.AddWRMTHDbContext(builder.Configuration);

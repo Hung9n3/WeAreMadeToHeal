@@ -5,7 +5,7 @@ namespace WeAreMadeToHeal.Customer
 {
     public class CouponUserController : BaseCustomerController<CouponUser, ICouponUserLogic>
     {
-        public CouponUserController(ILogger<BaseCustomerController<CouponUser, ICouponUserLogic>> logger, LogicContext logicContext, ICouponUserLogic logic) : base(logger, logicContext, logic)
+        public CouponUserController(ILogger<BaseCustomerController<CouponUser, ICouponUserLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, ICouponUserLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

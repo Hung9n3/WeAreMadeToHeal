@@ -4,7 +4,7 @@ namespace WeAreMadeToHeal.Admin
 {
     public class ImageController : BaseAdminController<Image, IImageLogic>
     {
-        public ImageController(ILogger<BaseAdminController<Image, IImageLogic>> logger, LogicContext logicContext, IImageLogic logic) : base(logger, logicContext, logic)
+        public ImageController(ILogger<BaseAdminController<Image, IImageLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IImageLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

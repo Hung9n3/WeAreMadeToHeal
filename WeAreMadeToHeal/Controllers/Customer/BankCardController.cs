@@ -2,14 +2,16 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WeAreMadeToHeal.Helpers;
 
 namespace WeAreMadeToHeal.Customer
 {
     public class BankCardController : BaseCustomerController<BankCard, IBankCardLogic>
     {
-        public BankCardController(ILogger<BaseCustomerController<BankCard, IBankCardLogic>> logger, LogicContext logicContext, IBankCardLogic logic) : base(logger, logicContext, logic)
+        public BankCardController(ILogger<BaseCustomerController<BankCard, IBankCardLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IBankCardLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
+
 
         #region [ Public Methods - Add | Update | Delete ]
         [HttpPost]

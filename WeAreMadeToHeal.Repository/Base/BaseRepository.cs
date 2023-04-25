@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal
 {
-    public class BaseRepository<User> : IBaseRepository<User> where User : BaseEntity
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         #region [ Fields ]
         protected readonly WRMTHDbContext _context;
-        protected readonly DbSet<User> _dbSet;
+        protected readonly DbSet<TEntity> _dbSet;
         #endregion
 
         #region [ CTor ]
         public BaseRepository(WRMTHDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<User>();
+            _dbSet = context.Set<TEntity>();
         }
         #endregion
 
         #region [ Public Methods - Create / Update / Delete ]
-        public virtual async Task AddAsync(User entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
             try
             {
@@ -52,7 +52,34 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task UpdateAsync(User entity)
+        public async Task SaveRangeAsync(List<TEntity> entity)
+        {
+            try
+            {
+                Guard.Argument(entity, nameof(entity));
+
+                foreach(var item in entity)
+                {
+                    if (await _dbSet.AnyAsync(x => x.Id == item.Id))
+                    {
+                        _dbSet.Update(item);
+                    }
+                    else await _dbSet.AddAsync(item);
+
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException("An Exception occured. See inner stack trace for details.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public virtual async Task UpdateAsync(TEntity entity)
         {
             try
             {
@@ -82,7 +109,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual void OnUpdateEntityProperties(User sourceEntity, User databaseEntity)
+        public virtual void OnUpdateEntityProperties(TEntity sourceEntity, TEntity databaseEntity)
         {
 
             Guard.Argument(sourceEntity, nameof(sourceEntity));
@@ -145,7 +172,7 @@ namespace WeAreMadeToHeal
         #endregion
 
         #region [ Public Methods - Get Single ]
-        public virtual async Task<User> GetAsync(string id)
+        public virtual async Task<TEntity> GetAsync(string id)
         {
             try
             {
@@ -165,7 +192,7 @@ namespace WeAreMadeToHeal
         #endregion
 
         #region [ Public Methods - Get List ]
-        public virtual async Task<List<User>> GetAllAsync()
+        public virtual async Task<List<TEntity>> GetAllAsync()
         {
             try
             {
@@ -181,7 +208,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<User>> GetActiveOrInActiveAsync(bool isActive)
+        public virtual async Task<List<TEntity>> GetActiveOrInActiveAsync(bool isActive)
         {
             try
             {
@@ -198,7 +225,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<User>> GetActiveAsync()
+        public virtual async Task<List<TEntity>> GetActiveAsync()
         {
             try
             {
@@ -214,7 +241,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<User>> GetInActiveAsync()
+        public virtual async Task<List<TEntity>> GetInActiveAsync()
         {
             try
             {
@@ -230,7 +257,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<User>> GetBatchAsync(List<string> entityIds)
+        public virtual async Task<List<TEntity>> GetBatchAsync(List<string> entityIds)
         {
             try
             {
@@ -252,7 +279,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<User>> GetChangesAsync(DateTime date)
+        public virtual async Task<List<TEntity>> GetChangesAsync(DateTime date)
         {
             try
             {
