@@ -7,7 +7,7 @@ namespace WeAreMadeToHeal
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/customer/[controller]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public abstract class BaseCustomerController<TEntity, TLogic> : ControllerBase where TEntity : BaseEntity where TLogic : IBaseLogicProvider<TEntity>
     {
         #region [ Fields ]

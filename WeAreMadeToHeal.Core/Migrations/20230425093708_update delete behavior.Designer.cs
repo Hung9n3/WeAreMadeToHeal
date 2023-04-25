@@ -12,8 +12,8 @@ using WeAreMadeToHeal;
 namespace WeAreMadeToHeal.Migrations
 {
     [DbContext(typeof(WRMTHDbContext))]
-    [Migration("20230425070153_init")]
-    partial class init
+    [Migration("20230425093708_update delete behavior")]
+    partial class updatedeletebehavior
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -458,25 +458,29 @@ namespace WeAreMadeToHeal.Migrations
                 {
                     b.HasOne("WeAreMadeToHeal.User", null)
                         .WithOne("BankCard")
-                        .HasForeignKey("WeAreMadeToHeal.BankCard", "UserId");
+                        .HasForeignKey("WeAreMadeToHeal.BankCard", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WeAreMadeToHeal.CartItem", b =>
                 {
                     b.HasOne("WeAreMadeToHeal.User", null)
                         .WithMany("CartItems")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WeAreMadeToHeal.CouponUser", b =>
                 {
                     b.HasOne("WeAreMadeToHeal.Coupon", "Coupon")
                         .WithMany("CouponUsers")
-                        .HasForeignKey("CouponId");
+                        .HasForeignKey("CouponId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WeAreMadeToHeal.User", "User")
                         .WithMany("CouponUsers")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Coupon");
 
@@ -487,14 +491,16 @@ namespace WeAreMadeToHeal.Migrations
                 {
                     b.HasOne("WeAreMadeToHeal.Product", null)
                         .WithMany("Images")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WeAreMadeToHeal.Order", b =>
                 {
                     b.HasOne("WeAreMadeToHeal.User", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("WeAreMadeToHeal.OrderItem", b =>
@@ -505,7 +511,8 @@ namespace WeAreMadeToHeal.Migrations
 
                     b.HasOne("WeAreMadeToHeal.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Product");
                 });
@@ -521,11 +528,13 @@ namespace WeAreMadeToHeal.Migrations
                 {
                     b.HasOne("WeAreMadeToHeal.Product", "Product")
                         .WithMany("TagProducts")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WeAreMadeToHeal.Tag", "Tag")
                         .WithMany("TagProducts")
-                        .HasForeignKey("TagId");
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Product");
 

@@ -19,6 +19,7 @@ namespace WeAreMadeToHeal
             services.AddTransient<ICouponUserLogic, CouponUserLogic>();
             services.AddTransient<ICouponLogic, CouponLogic>();
             services.AddTransient<ICartItemLogic, CartItemLogic>();
+            services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<ICategoryLogic, CategoryLogic>();
             services.AddTransient<IBankCardLogic, BankCardLogic>();
             services.AddTransient<IOrderItemLogic, OrderItemLogic>();

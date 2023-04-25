@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeAreMadeToHeal;
 
@@ -11,9 +12,11 @@ using WeAreMadeToHeal;
 namespace WeAreMadeToHeal.Migrations
 {
     [DbContext(typeof(WRMTHDbContext))]
-    partial class WRMTHDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230425091448_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -471,8 +474,7 @@ namespace WeAreMadeToHeal.Migrations
                 {
                     b.HasOne("WeAreMadeToHeal.Coupon", "Coupon")
                         .WithMany("CouponUsers")
-                        .HasForeignKey("CouponId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CouponId");
 
                     b.HasOne("WeAreMadeToHeal.User", "User")
                         .WithMany("CouponUsers")
@@ -488,8 +490,7 @@ namespace WeAreMadeToHeal.Migrations
                 {
                     b.HasOne("WeAreMadeToHeal.Product", null)
                         .WithMany("Images")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("WeAreMadeToHeal.Order", b =>
@@ -508,8 +509,7 @@ namespace WeAreMadeToHeal.Migrations
 
                     b.HasOne("WeAreMadeToHeal.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });
@@ -525,13 +525,11 @@ namespace WeAreMadeToHeal.Migrations
                 {
                     b.HasOne("WeAreMadeToHeal.Product", "Product")
                         .WithMany("TagProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("WeAreMadeToHeal.Tag", "Tag")
                         .WithMany("TagProducts")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TagId");
 
                     b.Navigation("Product");
 

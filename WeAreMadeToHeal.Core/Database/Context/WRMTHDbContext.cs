@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,93 @@ namespace WeAreMadeToHeal
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //BankCard
+            modelBuilder.Entity("WeAreMadeToHeal.BankCard", b =>
+            {
+                b.HasOne("WeAreMadeToHeal.User", null)
+                    .WithOne("BankCard")
+                    .HasForeignKey("WeAreMadeToHeal.BankCard", "UserId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            //Cart Item
+            modelBuilder.Entity("WeAreMadeToHeal.CartItem", b =>
+            {
+                b.HasOne("WeAreMadeToHeal.User", null)
+                    .WithMany("CartItems")
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            //Coupon User
+            modelBuilder.Entity("WeAreMadeToHeal.CouponUser", b =>
+            {
+                b.HasOne("WeAreMadeToHeal.Coupon", "Coupon")
+                    .WithMany("CouponUsers")
+                    .HasForeignKey("CouponId")
+                    .OnDelete(DeleteBehavior.Cascade); ;
+
+                b.HasOne("WeAreMadeToHeal.User", "User")
+                    .WithMany("CouponUsers")
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.Navigation("Coupon");
+
+                b.Navigation("User");
+            });
+
+            //Order
+            modelBuilder.Entity("WeAreMadeToHeal.Order", b =>
+            {
+                b.HasOne("WeAreMadeToHeal.User", null)
+                    .WithMany("Orders")
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+
+            //Order Item
+            modelBuilder.Entity("WeAreMadeToHeal.OrderItem", b =>
+            {
+                b.HasOne("WeAreMadeToHeal.Order", null)
+                    .WithMany("OrderItems")
+                    .HasForeignKey("OrderId");
+
+                b.HasOne("WeAreMadeToHeal.Product", "Product")
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.SetNull);
+
+                b.Navigation("Product");
+            });
+
+            //Tag Product
+            modelBuilder.Entity("WeAreMadeToHeal.TagProduct", b =>
+            {
+                b.HasOne("WeAreMadeToHeal.Product", "Product")
+                    .WithMany("TagProducts")
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasOne("WeAreMadeToHeal.Tag", "Tag")
+                    .WithMany("TagProducts")
+                    .HasForeignKey("TagId")
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.Navigation("Product");
+
+                b.Navigation("Tag");
+            });
+
+            //Image
+            modelBuilder.Entity("WeAreMadeToHeal.Image", b =>
+            {
+                b.HasOne("WeAreMadeToHeal.Product", null)
+                    .WithMany("Images")
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
         }
         #endregion
     }
