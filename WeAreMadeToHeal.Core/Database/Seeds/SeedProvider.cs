@@ -83,9 +83,9 @@ public class SeedProvider
             Id = "1",
             Email = "chovameo352@gmail.com",
             Name = "customer 1",
-            Username = "customer1",
+            UserName = "customer1",
             Role = UserRoles.Customer,
-            Password = "string",
+            PasswordHash = "string",
         });
 
         this.Users.Add(new User()
@@ -93,9 +93,9 @@ public class SeedProvider
             Id = "2",
             Email = "skvuahung1@gmail.com",
             Name = "customer 2",
-            Username = "customer2",
+            UserName = "customer2",
             Role = UserRoles.Customer,
-            Password = "string",
+            PasswordHash = "string",
         });
 
         this.Users.Add(new User()
@@ -103,9 +103,9 @@ public class SeedProvider
             Id = "3",
             Email = "doduyhung261200@gmail.com",
             Name = "admin 1",
-            Username = "admin",
+            UserName = "admin",
             Role = UserRoles.Admin,
-            Password = "string",
+            PasswordHash = "string",
         });
         #endregion
 

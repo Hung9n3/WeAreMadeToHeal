@@ -1,5 +1,7 @@
 ﻿using Dawn;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +11,22 @@ using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal;
 
-public class UserLogic : IUserLogic
+public class UserManager : UserManager<User>, IUserLogic
 {
-    private readonly UserManager<User> _userManager;
     private readonly IUserRepository _repository;
-    public UserLogic(UserManager<User> userManager, IUserRepository repository)
+    public UserManager(IUserStore<User> store,
+            IOptions<IdentityOptions> optionsAccessor,
+            IPasswordHasher<User> passwordHasher,
+            IEnumerable<IUserValidator<User>> userValidators,
+            IEnumerable<IPasswordValidator<User>> passwordValidators,
+            ILookupNormalizer keyNormalizer,
+            IdentityErrorDescriber errors,
+            IServiceProvider services,
+            ILogger<UserManager<User>> logger,
+            IUserRepository userRepository
+        ) : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
     {
-        _userManager = userManager;
-        _repository = repository;
+        _repository = userRepository;
     }
 
     public virtual Task AddAsync(User entity)
@@ -88,7 +98,7 @@ public class UserLogic : IUserLogic
 
     public Task<User> GetByName(string name)
     {
-        var result = _userManager.FindByNameAsync(name);
+        var result = base.FindByNameAsync(name);
         return result;
     }
 

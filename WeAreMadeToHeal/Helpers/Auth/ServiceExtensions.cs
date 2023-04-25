@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace WeAreMadeToHeal.Helpers.Auth.Authorize
@@ -38,6 +37,24 @@ namespace WeAreMadeToHeal.Helpers.Auth.Authorize
                         ClockSkew = TimeSpan.Zero
                     };
                 });
+        }
+
+        public static void AddIdentity(this IServiceCollection services)
+        {
+           services.AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 1;
+
+                options.User.RequireUniqueEmail = false;
+                options.SignIn.RequireConfirmedEmail = false;
+            })
+                .AddEntityFrameworkStores<WRMTHDbContext>()
+                .AddUserManager<UserManager<User>>()
+                .AddDefaultTokenProviders();
         }
     }
 }

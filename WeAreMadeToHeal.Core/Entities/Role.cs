@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace WeAreMadeToHeal
 {
-    public class Role : BaseEntity
+    public class Role : IdentityRole
     {
         public string Name { get; set; }
     }

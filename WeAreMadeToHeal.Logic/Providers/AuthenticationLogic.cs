@@ -1,4 +1,5 @@
 ﻿using Dawn;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,11 +15,13 @@ namespace WeAreMadeToHeal;
 public class AuthenticationLogic : IAuthenticationLogic
 {
     private readonly IAuthenticationRepository _dataProvider;
+    private readonly UserManager<User> _userManager;
     private readonly IConfiguration _configuration;
-    public AuthenticationLogic(IAuthenticationRepository dataProvider, IConfiguration configuration)
+    public AuthenticationLogic(IAuthenticationRepository dataProvider, IConfiguration configuration, UserManager<User> userManager)
     {
         _dataProvider = dataProvider;
         _configuration = configuration;
+        _userManager = userManager;
     }
     public async Task<string> Login(string username, string password)
     {

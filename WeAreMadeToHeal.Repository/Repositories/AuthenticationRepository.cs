@@ -34,7 +34,7 @@ public class AuthenticationRepository : IAuthenticationRepository
                 throw new ArgumentNullException($"Login failed: Check your Username and Password");
             }
             Guard.Argument(password, nameof(password));
-            if (user.Password == password) return user;
+            if (user.PasswordHash == password) return user;
             else throw new ArgumentNullException($"Login failed: Check your Username and Password");
         }
         catch (Exception ex)

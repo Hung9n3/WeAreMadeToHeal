@@ -2,9 +2,12 @@
 
 namespace WeAreMadeToHeal.Customer
 {
-    public class UserController : BaseCustomerController<User, IUserLogic>
+    public class UserController : ControllerBase
     {
-        public UserController(ILogger<BaseCustomerController<User, IUserLogic>> logger, LogicContext logicContext, IUserLogic logic) : base(logger, logicContext, logic)
+        protected readonly ILogger<UserController> _logger;
+        protected readonly LogicContext _logicContext;
+        protected readonly IUserLogic _logic;
+        public UserController(ILogger<UserController> logger, LogicContext logicContext, IUserLogic logic)
         {
         }
 
