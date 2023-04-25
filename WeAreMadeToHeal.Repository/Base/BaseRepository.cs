@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<User> : IBaseRepository<User> where User : BaseEntity
     {
         #region [ Fields ]
         protected readonly WRMTHDbContext _context;
-        protected readonly DbSet<T> _dbSet;
+        protected readonly DbSet<User> _dbSet;
         #endregion
 
         #region [ CTor ]
         public BaseRepository(WRMTHDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<T>();
+            _dbSet = context.Set<User>();
         }
         #endregion
 
         #region [ Public Methods - Create / Update / Delete ]
-        public virtual async Task AddAsync(T entity)
+        public virtual async Task AddAsync(User entity)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(User entity)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual void OnUpdateEntityProperties(T sourceEntity, T databaseEntity)
+        public virtual void OnUpdateEntityProperties(User sourceEntity, User databaseEntity)
         {
 
             Guard.Argument(sourceEntity, nameof(sourceEntity));
@@ -145,7 +145,7 @@ namespace WeAreMadeToHeal
         #endregion
 
         #region [ Public Methods - Get Single ]
-        public virtual async Task<T> GetAsync(string id)
+        public virtual async Task<User> GetAsync(string id)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace WeAreMadeToHeal
         #endregion
 
         #region [ Public Methods - Get List ]
-        public virtual async Task<List<T>> GetAllAsync()
+        public virtual async Task<List<User>> GetAllAsync()
         {
             try
             {
@@ -181,7 +181,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<T>> GetActiveOrInActiveAsync(bool isActive)
+        public virtual async Task<List<User>> GetActiveOrInActiveAsync(bool isActive)
         {
             try
             {
@@ -198,7 +198,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<T>> GetActiveAsync()
+        public virtual async Task<List<User>> GetActiveAsync()
         {
             try
             {
@@ -214,7 +214,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<T>> GetInActiveAsync()
+        public virtual async Task<List<User>> GetInActiveAsync()
         {
             try
             {
@@ -230,7 +230,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<T>> GetBatchAsync(List<string> entityIds)
+        public virtual async Task<List<User>> GetBatchAsync(List<string> entityIds)
         {
             try
             {
@@ -252,7 +252,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        public virtual async Task<List<T>> GetChangesAsync(DateTime date)
+        public virtual async Task<List<User>> GetChangesAsync(DateTime date)
         {
             try
             {

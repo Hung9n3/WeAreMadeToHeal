@@ -9,7 +9,26 @@ namespace WeAreMadeToHeal
 {
     public interface IUserRepository
     {
-        
+        Task AddAsync(User entity);
+
+        Task UpdateAsync(User entity);
+
+        Task ActivateOrDeactiveAsync(string id, bool isActive);
+
+        Task DeleteAsync(string id);
+
+        Task<User> GetAsync(string id);
+
+        Task<List<User>> GetAllAsync();
+
+        Task<List<User>> GetActiveOrInActiveAsync(bool isActive);
+
+        Task<List<User>> GetActiveAsync();
+
+        Task<List<User>> GetInActiveAsync();
+
+        Task<List<User>> GetBatchAsync(List<string> entityIds);
+
         Task<User> GetByEmail(string email);
         Task<User> GetByUsername(string username);
 

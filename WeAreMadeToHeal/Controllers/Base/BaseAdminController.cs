@@ -8,17 +8,17 @@ namespace WeAreMadeToHeal
     //[Authorize(Roles = "Admin")]
     [Route("api/v{version:apiVersion}/admin/[controller]")]
     [ApiVersion("1.0")]
-    public abstract class BaseAdminController<T, TLogic> : ControllerBase where T : BaseEntity where TLogic : IBaseLogicProvider<T>
+    public abstract class BaseAdminController<TEntity, TLogic> : ControllerBase where TEntity : BaseEntity where TLogic : IBaseLogicProvider<TEntity>
     {
         #region [ Fields ]
-        protected readonly ILogger<BaseAdminController<T, TLogic>> _logger;
+        protected readonly ILogger<BaseAdminController<TEntity, TLogic>> _logger;
         protected readonly LogicContext _logicContext;
         protected readonly TLogic _logic;
         #endregion
 
         #region [ CTor ]
         public BaseAdminController(
-            ILogger<BaseAdminController<T, TLogic>> logger,
+            ILogger<BaseAdminController<TEntity, TLogic>> logger,
             LogicContext logicContext,
             TLogic logic)
         {
@@ -33,7 +33,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> AddAsync([FromBody] T entity)
+        public virtual async Task<IActionResult> AddAsync([FromBody] TEntity entity)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace WeAreMadeToHeal
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> UpdateAsync([FromBody] T entity)
+        public virtual async Task<IActionResult> UpdateAsync([FromBody] TEntity entity)
         {
             try
             {

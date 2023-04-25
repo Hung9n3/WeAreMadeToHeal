@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal
 {
-    public interface IBaseLogicProvider<T> where T : BaseEntity
+    public interface IBaseLogicProvider<User> where User : BaseEntity
     {
-        Task AddAsync(T entity);
+        Task AddAsync(User entity);
 
-        Task UpdateAsync(T entity);
+        Task UpdateAsync(User entity);
 
         Task ActivateOrDeactiveAsync(string id, bool isActive);
 
         Task DeleteAsync(string id);
 
-        Task<T> GetAsync(string id);
+        Task<User> GetAsync(string id);
 
-        Task<List<T>> GetAllAsync();
+        Task<List<User>> GetAllAsync();
 
-        Task<List<T>> GetActiveOrInActiveAsync(bool isActive);
+        Task<List<User>> GetActiveOrInActiveAsync(bool isActive);
 
-        Task<List<T>> GetActiveAsync();
+        Task<List<User>> GetActiveAsync();
 
-        Task<List<T>> GetInActiveAsync();
+        Task<List<User>> GetInActiveAsync();
 
-        Task<List<T>> GetBatchAsync(List<string> entityIds);
+        Task<List<User>> GetBatchAsync(List<string> entityIds);
 
-        Task<List<T>> GetChangesAsync(DateTime date);
+        Task<List<User>> GetChangesAsync(DateTime date);
     }
 }
