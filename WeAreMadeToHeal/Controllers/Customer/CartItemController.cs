@@ -5,9 +5,10 @@ namespace WeAreMadeToHeal.Customer
 {
     public class CartItemController : BaseCustomerController<CartItem, ICartItemLogic>
     {
-        public CartItemController(ILogger<BaseCustomerController<CartItem, ICartItemLogic>> logger, LogicContext logicContext, ICartItemLogic logic) : base(logger, logicContext, logic)
+        public CartItemController(ILogger<BaseCustomerController<CartItem, ICartItemLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, ICartItemLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
+
 
         #region [ Public Methods - Add | Update | Delete ]
         [HttpPost]
@@ -81,16 +82,17 @@ namespace WeAreMadeToHeal.Customer
         #endregion
 
         #region [ Public Methods - List ]
-        [HttpGet("userId")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> GetByUserAsync(string userId)
+        public virtual async Task<IActionResult> GetByUserAsync()
         {
-            Guard.Argument(userId, nameof(userId));
             try
             {
+                var userId = User.Claims.First(c => c.Type == "UserId").Value;
+
                 var result = await this._logic.GetByUserAsync(userId).ConfigureAwait(false);
                 if (result == null)
                 {

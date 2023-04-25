@@ -22,6 +22,7 @@ namespace WeAreMadeToHeal
             services.AddTransient<ICouponUserRepository, CouponUserRepository>();
             services.AddTransient<ICouponRepository, CouponRepository>();
             services.AddTransient<ICartItemRepository, CartItemRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IBankCardRepository, BankCardRepository>();
             services.AddTransient<IOrderItemRepository, OrderItemRepository>();

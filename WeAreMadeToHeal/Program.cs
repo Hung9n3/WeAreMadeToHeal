@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
         In = ParameterLocation.Header,
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
+        Type = SecuritySchemeType.ApiKey,
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
@@ -65,7 +65,11 @@ builder.Services.AddApiVersioning(opt =>
 
 //Auth
 builder.Services.AddJwtBearer(builder.Configuration);
+builder.Services.AddIdentity();
 builder.Services.AddPolicy();
+
+//Helper
+builder.Services.AddHelpers();
 
 //Data
 builder.Services.AddWRMTHDbContext(builder.Configuration);

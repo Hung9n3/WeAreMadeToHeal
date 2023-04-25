@@ -5,7 +5,7 @@ namespace WeAreMadeToHeal.Customer
 {
     public class CouponController : BaseCustomerController<Coupon, ICouponLogic>
     {
-        public CouponController(ILogger<BaseCustomerController<Coupon, ICouponLogic>> logger, LogicContext logicContext, ICouponLogic logic) : base(logger, logicContext, logic)
+        public CouponController(ILogger<BaseCustomerController<Coupon, ICouponLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, ICouponLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 
@@ -101,16 +101,17 @@ namespace WeAreMadeToHeal.Customer
         #endregion
 
         #region [ Public Custom Methods - List ]
-        [HttpGet("user/{userId}")]
-        [AllowAnonymous]
+        [HttpGet("user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> GetByUserAsync(string userId)
+        public virtual async Task<IActionResult> GetByUserAsync()
         {
             try
             {
+                var userId = User.Claims.First(c => c.Type == "UserId").Value;
+
                 var result = await this._logic.GetByUserAsync(userId).ConfigureAwait(false);
                 if (result == null)
                 {

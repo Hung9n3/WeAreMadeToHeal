@@ -4,7 +4,7 @@ namespace WeAreMadeToHeal.Admin
 {
     public class CartItemController : BaseAdminController<CartItem, ICartItemLogic>
     {
-        public CartItemController(ILogger<BaseAdminController<CartItem, ICartItemLogic>> logger, LogicContext logicContext, ICartItemLogic logic) : base(logger, logicContext, logic)
+        public CartItemController(ILogger<BaseAdminController<CartItem, ICartItemLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, ICartItemLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
     }

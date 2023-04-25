@@ -4,7 +4,7 @@ namespace WeAreMadeToHeal.Admin
 {
     public class CategoryController : BaseAdminController<Category, ICategoryLogic>
     {
-        public CategoryController(ILogger<BaseAdminController<Category, ICategoryLogic>> logger, LogicContext logicContext, ICategoryLogic logic) : base(logger, logicContext, logic)
+        public CategoryController(ILogger<BaseAdminController<Category, ICategoryLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, ICategoryLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
     }

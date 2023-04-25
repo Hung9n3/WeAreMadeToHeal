@@ -5,7 +5,7 @@ namespace WeAreMadeToHeal.Customer
 {
     public class CategoryController : BaseCustomerController<Category, ICategoryLogic>
     {
-        public CategoryController(ILogger<BaseCustomerController<Category, ICategoryLogic>> logger, LogicContext logicContext, ICategoryLogic logic) : base(logger, logicContext, logic)
+        public CategoryController(ILogger<BaseCustomerController<Category, ICategoryLogic>> logger,ExcelHandlerService excelHandlerService, LogicContext logicContext, ICategoryLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 

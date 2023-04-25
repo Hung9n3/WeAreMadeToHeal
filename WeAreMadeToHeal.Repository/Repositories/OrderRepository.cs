@@ -15,11 +15,75 @@ namespace WeAreMadeToHeal
            
         }
 
-        
 
 
-        #region [Custom Method Return Single]
 
+        #region [Public Override Method]
+        public override async Task<Order> GetAsync(string id)
+        {
+            try
+            {
+                Guard.Argument(id, nameof(id));
+
+
+                var dbResult = await _dbSet.AsNoTracking()
+                                                .Where(x => x.Id == id && x.IsActive).Include(x => x.OrderItems).FirstOrDefaultAsync();
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public override async Task<List<Order>> GetAllAsync()
+        {
+            try
+            {
+                var dbResult = await _dbSet.AsNoTracking()
+                                                .Include(x => x.OrderItems).ToListAsync();
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public override async Task<List<Order>> GetBatchAsync(List<string> ids)
+        {
+            try
+            {
+                var dbResult = await _dbSet.AsNoTracking().
+                                                Where(x => ids.Contains(x.Id) ).Include(x => x.OrderItems).ToListAsync();
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public override async Task<List<Order>> GetActiveOrInActiveAsync(bool isActive)
+        {
+            try
+            {
+
+                var dbResult = await _dbSet.AsNoTracking()
+                                                .Where(x => x.IsActive == isActive)
+                                                .Include(x => x.OrderItems)
+                                                .ToListAsync();
+                return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         #endregion
 
         #region [Custom Method Return List]

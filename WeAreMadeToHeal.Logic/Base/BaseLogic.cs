@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WeAreMadeToHeal
 {
-    public class BaseLogic<User, TDb> : IBaseLogicProvider<User> where User : BaseEntity where TDb : IBaseRepository<User>
+    public class BaseLogic<TEntity, TDb> : IBaseLogicProvider<TEntity> where TEntity : BaseEntity where TDb : IBaseRepository<TEntity>
     {
         protected readonly TDb _dataProvider;
 
@@ -17,14 +17,21 @@ namespace WeAreMadeToHeal
             _dataProvider = dataProvider;
         }
 
-        public virtual Task AddAsync(User entity)
+        public virtual Task AddAsync(TEntity entity)
         {
             Guard.Argument(entity, "AddAsync");
             TDb dataProvider = _dataProvider;
             return dataProvider.AddAsync(entity);
         }
 
-        public virtual Task UpdateAsync(User entity)
+        public Task SaveRangeAsync(List<TEntity> entity)
+        {
+            Guard.Argument(entity, "AddAsync");
+            TDb dataProvider = _dataProvider;
+            return dataProvider.SaveRangeAsync(entity);
+        }
+
+        public virtual Task UpdateAsync(TEntity entity)
         {
             Guard.Argument(entity, "UpdateAsync");
             TDb dataProvider = _dataProvider;
@@ -58,44 +65,44 @@ namespace WeAreMadeToHeal
             return Task.WhenAll(list);
         }
 
-        public virtual Task<User> GetAsync(string id)
+        public virtual Task<TEntity> GetAsync(string id)
         {
             Guard.Argument(id, "GetAsync");
             TDb dataProvider = _dataProvider;
             return dataProvider.GetAsync(id);
         }
 
-        public virtual Task<List<User>> GetAllAsync()
+        public virtual Task<List<TEntity>> GetAllAsync()
         {
             TDb dataProvider = _dataProvider;
             return dataProvider.GetAllAsync();
         }
 
-        public virtual Task<List<User>> GetActiveOrInActiveAsync(bool isActive)
+        public virtual Task<List<TEntity>> GetActiveOrInActiveAsync(bool isActive)
         {
             TDb dataProvider = _dataProvider;
             return dataProvider.GetActiveOrInActiveAsync(isActive);
         }
 
-        public virtual Task<List<User>> GetActiveAsync()
+        public virtual Task<List<TEntity>> GetActiveAsync()
         {
             TDb dataProvider = _dataProvider;
             return dataProvider.GetActiveAsync();
         }
 
-        public virtual Task<List<User>> GetInActiveAsync()
+        public virtual Task<List<TEntity>> GetInActiveAsync()
         {
             TDb dataProvider = _dataProvider;
             return dataProvider.GetInActiveAsync();
         }
 
-        public virtual Task<List<User>> GetBatchAsync(List<string> entityIds)
+        public virtual Task<List<TEntity>> GetBatchAsync(List<string> entityIds)
         {
             TDb dataProvider = _dataProvider;
             return dataProvider.GetBatchAsync(entityIds);
         }
 
-        public virtual Task<List<User>> GetChangesAsync(DateTime date)
+        public virtual Task<List<TEntity>> GetChangesAsync(DateTime date)
         {
             Guard.Argument(date, "date");
             TDb dataProvider = _dataProvider;

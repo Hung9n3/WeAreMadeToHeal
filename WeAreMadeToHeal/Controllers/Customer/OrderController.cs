@@ -5,7 +5,7 @@ namespace WeAreMadeToHeal.Customer
 {
     public class OrderController : BaseCustomerController<Order, IOrderLogic>
     {
-        public OrderController(ILogger<BaseCustomerController<Order, IOrderLogic>> logger, LogicContext logicContext, IOrderLogic logic) : base(logger, logicContext, logic)
+        public OrderController(ILogger<BaseCustomerController<Order, IOrderLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IOrderLogic logic) : base(logger, excelHandlerService, logicContext, logic)
         {
         }
 
@@ -86,16 +86,17 @@ namespace WeAreMadeToHeal.Customer
             }
         }
 
-        [HttpGet("userId")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public virtual async Task<IActionResult> GetByUserAsync(string userId)
+        public virtual async Task<IActionResult> GetByUserAsync()
         {
-            Guard.Argument(userId, nameof(userId));
             try
             {
+                var userId = User.Claims.First(c => c.Type == "UserId").Value;
+
                 var result = await this._logic.GetByUserAsync(userId).ConfigureAwait(false);
                 if (result == null)
                 {

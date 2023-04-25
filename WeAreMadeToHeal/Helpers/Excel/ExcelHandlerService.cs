@@ -11,7 +11,7 @@ public class ExcelHandlerService
             throw new("File should be compressed in '.xlsx' format");
     }
 
-    public async Task<DataRowCollection> GetRows(IFormFile file, CancellationToken cancellationToken)
+    public async Task<DataTable> GetTable(IFormFile file, CancellationToken cancellationToken)
     {
         CheckFileFormat(file.FileName);
 
@@ -37,7 +37,7 @@ public class ExcelHandlerService
 
                 var dataTable = dataSet.Tables[0];
 
-                return dataTable.Rows;
+                return dataTable;
             }
         }
     }

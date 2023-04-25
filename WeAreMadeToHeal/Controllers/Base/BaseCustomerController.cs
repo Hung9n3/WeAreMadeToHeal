@@ -6,12 +6,13 @@ namespace WeAreMadeToHeal
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/customer/[controller]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/customer/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public abstract class BaseCustomerController<TEntity, TLogic> : ControllerBase where TEntity : BaseEntity where TLogic : IBaseLogicProvider<TEntity>
     {
         #region [ Fields ]
         protected readonly ILogger<BaseCustomerController<TEntity, TLogic>> _logger;
+        protected readonly ExcelHandlerService _excelHandlerService;
         protected readonly LogicContext _logicContext;
         protected readonly TLogic _logic;
         #endregion
@@ -19,16 +20,18 @@ namespace WeAreMadeToHeal
         #region [ CTor ]
         public BaseCustomerController(
             ILogger<BaseCustomerController<TEntity, TLogic>> logger,
+            ExcelHandlerService excelHandlerService,
             LogicContext logicContext,
             TLogic logic)
         {
             this._logger = logger;
+            this._excelHandlerService = excelHandlerService;
             this._logicContext = logicContext;
-            _logic = logic;
+            this._logic = logic;
         }
         #endregion
 
-        
+
 
     }
 }
