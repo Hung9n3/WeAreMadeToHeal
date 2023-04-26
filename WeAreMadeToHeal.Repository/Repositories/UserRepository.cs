@@ -385,7 +385,7 @@ namespace WeAreMadeToHeal
                 Guard.Argument(name, nameof(name));
 
 
-                var dbResult = await _dbSet.AsNoTracking().Where(x => x.Name == name)
+                var dbResult = await _dbSet.AsNoTracking().Where(x => x.Name.Contains(name))
                                                           .ToListAsync();
                 return dbResult;
 

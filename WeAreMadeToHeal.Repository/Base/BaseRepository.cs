@@ -1,11 +1,14 @@
 ﻿using Dawn;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
+using System.Reflection;
 
 namespace WeAreMadeToHeal
 {
@@ -271,6 +274,47 @@ namespace WeAreMadeToHeal
                                                 .Where(x => entityIds.Contains(x.Id))
                                                 .ToListAsync();
                 return dbResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public virtual async Task<List<TEntity>> GetByNameAsync(string name)
+        {
+            try
+            {
+                var dbResult = new List<TEntity>();
+                Guard.Argument(name, nameof(name));
+                var properties = typeof(TEntity).GetProperties();
+                if (properties.Any(x => x.Name == "Name"))
+                {
+                    foreach (var property in properties)
+                    {
+                        if (property.Name == "Name")
+                        {
+                            var param = Expression.Parameter(typeof(TEntity));
+                            MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+                            var condition =
+                            Expression.Lambda<Func<TEntity, bool>>(
+                                    Expression.Call(
+                                        Expression.Property(param, "Name"),
+                                        method,
+                                        Expression.Constant(name, typeof(string))
+                                    ),
+                                    param
+                                );
+                            dbResult = await _dbSet.AsNoTracking()
+                                               .Where(condition)
+                                               .ToListAsync();
+                            break;
+                        }
+                    }
+                    return dbResult;
+                }
+                else return new List<TEntity>();
 
             }
             catch (Exception ex)

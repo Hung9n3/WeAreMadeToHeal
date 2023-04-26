@@ -31,5 +31,7 @@ namespace WeAreMadeToHeal
         Task<List<TEntity>> GetBatchAsync(List<string> entityIds);
 
         Task<List<TEntity>> GetChangesAsync(DateTime date);
+
+        Task<List<TEntity>> GetByNameAsync(string name);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace WeAreMadeToHeal
     public interface IUserManager
     {
         Task AddAsync(User entity);
+
+        Task<IdentityResult> UpdateAsync(User user);
 
         Task ActivateOrDeactiveAsync(string id, bool isActive);
 
@@ -29,7 +32,7 @@ namespace WeAreMadeToHeal
 
         Task<User> GetByUsernameOrEmail(string payload);
 
-        Task<User> GetByName(string name);
+        Task<List<User>> GetByName(string name);
         Task<List<User>> GetByRole(UserRoles role);
         Task<List<User>> GetUnConfirmOrConfirmedPhone(bool isConfirm);
         Task<List<User>> GetUnConfirmOrConfirmedEmail(bool isConfirm);

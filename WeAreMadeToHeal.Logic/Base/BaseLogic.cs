@@ -108,5 +108,12 @@ namespace WeAreMadeToHeal
             TDb dataProvider = _dataProvider;
             return dataProvider.GetChangesAsync(date);
         }
+
+        public virtual Task<List<TEntity>> GetByNameAsync(string name)
+        {
+            Guard.Argument(name, nameof(name));
+            TDb dataProvider = _dataProvider;
+            return dataProvider.GetByNameAsync(name);
+        }
     }
 }

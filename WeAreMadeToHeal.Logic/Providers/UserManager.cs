@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WeAreMadeToHeal.Enums;
 
@@ -88,30 +89,40 @@ public class UserManager : UserManager<User>, IUserManager
         return _repository.GetBatchAsync(entityIds);
     }
 
-    public Task<User> GetByName(string name)
+    public Task<List<User>> GetByName(string name)
     {
-        var result = base.FindByNameAsync(name);
+        Guard.Argument(name, nameof(name));
+        var result = _repository.GetByName(name);
         return result;
     }
 
     public Task<List<User>> GetByRole(UserRoles role)
     {
-        throw new NotImplementedException();
+        var result = _repository.GetByRole(role);
+        return result;
     }
 
     public Task<User> GetByUsernameOrEmail(string payload)
     {
-        throw new NotImplementedException();
+        Guard.Argument(payload, nameof(payload));
+        Regex regex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        Match match= regex.Match(payload);
+        if(match.Success)
+        {
+            return _repository.GetByEmail(payload);
+        }
+        else return _repository.GetByUsername(payload);
     }
 
     public Task<List<User>> GetUnConfirmOrConfirmedEmail(bool isConfirm)
     {
-        throw new NotImplementedException();
+        return _repository.GetUnConfirmOrConfirmedEmail(isConfirm);
     }
 
     public Task<List<User>> GetUnConfirmOrConfirmedPhone(bool isConfirm)
     {
-        throw new NotImplementedException();
+        return _repository.GetUnConfirmOrConfirmedPhone(isConfirm);
+
     }
 
 }

@@ -56,7 +56,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        [HttpPost("excel")]
+        [HttpPost("save-excel")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -80,7 +80,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        [HttpPost]
+        [HttpPost("save-range")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -235,7 +235,7 @@ namespace WeAreMadeToHeal
             }
         }
 
-        [HttpGet("{isActive}")]
+        [HttpGet("active/{isActive}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -263,8 +263,36 @@ namespace WeAreMadeToHeal
             }
         }
 
+        [HttpGet("name/{name}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public virtual async Task<IActionResult> GetByNameAsync(string name)
+        {
+            try
+            {
+                var result = await this._logic.GetByNameAsync(name).ConfigureAwait(false);
+                if (result == null)
+                {
+                    return base.NotFound(result);
+                }
+                return base.Ok(result);
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex, "Error in {0}", "");
+                return base.BadRequest();
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex, "Error in {0}", "");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
 
-        [HttpPost]
+
+        [HttpPost("batch")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -293,7 +321,7 @@ namespace WeAreMadeToHeal
         }
 
 
-        [HttpPost]
+        [HttpPost("change")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
