@@ -1,27 +1,37 @@
 ﻿using Dawn;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
+using System.Net.Http;
+
 
 namespace WeAreMadeToHeal;
+
 
 public class AuthenticationLogic : IAuthenticationLogic
 {
     private readonly IAuthenticationRepository _dataProvider;
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _configuration;
-    public AuthenticationLogic(IAuthenticationRepository dataProvider, IConfiguration configuration, UserManager<User> userManager)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public AuthenticationLogic(IAuthenticationRepository dataProvider, IConfiguration configuration, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
     {
         _dataProvider = dataProvider;
         _configuration = configuration;
         _userManager = userManager;
+        _httpContextAccessor = httpContextAccessor;
     }
     public async Task<string> Login(string username, string password)
     {
@@ -61,5 +71,34 @@ public class AuthenticationLogic : IAuthenticationLogic
         {
             throw new Exception(ex.Message);
         }
+    }
+    
+    public Task<User> Register(string username, string password)
+    {
+        try
+        {
+            Guard.Argument(username, "username is null");
+            Guard.Argument(password, "password is null");
+            var result = _dataProvider.Register(username, password);
+
+            return result;
+        }
+        catch (ArgumentNullException ex)
+        {
+            throw new ArgumentNullException(ex.Message);
+        }
+
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public async Task<string> GetValidEmailToken(User user)
+    {
+        var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        var validEmailToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(confirmEmailToken));
+
+        return validEmailToken;
     }
 }
