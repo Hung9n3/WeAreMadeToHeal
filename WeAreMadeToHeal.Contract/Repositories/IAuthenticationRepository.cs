@@ -9,4 +9,5 @@ namespace WeAreMadeToHeal;
 public interface IAuthenticationRepository
 {
     Task<User> Login(string username, string password);
+    Task<User> Register(string username, string password);
 }

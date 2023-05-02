@@ -18,6 +18,7 @@ namespace WeAreMadeToHeal.Helpers.Email
             _logger = logger;
         }
 
+        
         public async Task SendMail(string destination, string subject, string? body)
         {
             try
