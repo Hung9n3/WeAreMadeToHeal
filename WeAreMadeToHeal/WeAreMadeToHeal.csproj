@@ -4,9 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>51b1e6c4-6155-43b2-9c8e-f330e42feafa</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Dawn.Guard" Version="1.12.0" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
@@ -24,12 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\Auth\Authorize\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WeAreMadeToHeal.Core\WeAreMadeToHeal.Core.csproj" />
+    <ProjectReference Include="..\WeAreMadeToHeal.Helper\WeAreMadeToHeal.Helper.csproj" />
     <ProjectReference Include="..\WeAreMadeToHeal.Logic\WeAreMadeToHeal.Logic.csproj" />
   </ItemGroup>
 

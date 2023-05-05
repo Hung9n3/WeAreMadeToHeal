@@ -1,15 +1,7 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Data;
-using System.Text;
 using WeAreMadeToHeal;
-using WeAreMadeToHeal.Helpers.Auth;
-using WeAreMadeToHeal.Helpers.Auth.Authorize;
-
+using WeAreMadeToHeal.Helpers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

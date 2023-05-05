@@ -1,4 +1,5 @@
-﻿using Dawn;
+﻿using AutoMapper;
+using Dawn;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +17,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WeAreMadeToHeal.Helpers.Auth;
-using WeAreMadeToHeal.Helpers.Auth.Authenticate;
 using WeAreMadeToHeal.Helpers.Email;
 
 namespace WeAreMadeToHeal.Controllers.Auth
@@ -27,15 +27,17 @@ namespace WeAreMadeToHeal.Controllers.Auth
     {
         protected readonly ILogger<AuthController> _logger;
         private IAuthenticationLogic _logic { get; set; }
+        private IMapper _mapper { get; set; }
         private readonly EmailHelper _emailHelper;
-        public AuthController(IAuthenticationLogic logic, ILogger<AuthController> logger, EmailHelper emailHelper)
+        public AuthController(IAuthenticationLogic logic, ILogger<AuthController> logger, EmailHelper emailHelper, IMapper mapper)
         {
             _logic = logic;
             _logger = logger;
+            _mapper = mapper;
             _emailHelper = emailHelper;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
             Guard.Argument(loginModel.Username, nameof(loginModel.Username));
@@ -57,14 +59,15 @@ namespace WeAreMadeToHeal.Controllers.Auth
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterModel model)
         {
             Guard.Argument(model.UserName, nameof(model.UserName));
             Guard.Argument(model.Password, nameof(model.Password));
             try
             {
-                var result = await this._logic.Register(model.UserName, model.Password).ConfigureAwait(false);
+                var user = _mapper.Map<User>(model);
+                var result = await this._logic.Register(user, model.Password).ConfigureAwait(false);
                 await SendConfirmationEmail(result);
                 return base.Ok(result);
             }

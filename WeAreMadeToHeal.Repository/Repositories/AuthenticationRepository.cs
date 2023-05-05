@@ -49,15 +49,11 @@ public class AuthenticationRepository : IAuthenticationRepository
         }
     }
 
-    public async Task<User> Register(string username, string password)
+    public async Task<User> Register(User user, string password)
     {
         try
         {
-            Guard.Argument(username, nameof(username));
-            var user = new User()
-            {
-                UserName = username,
-            };
+            Guard.Argument(user, nameof(user));
             Guard.Argument(password, nameof(password));
 
             var result = await _userManager.CreateAsync(user, password);

@@ -1,4 +1,6 @@
-﻿namespace WeAreMadeToHeal.Helpers.Email
+﻿using Microsoft.Extensions.Configuration;
+
+namespace WeAreMadeToHeal.Helpers.Email
 {
     public class EmailConfig
     {

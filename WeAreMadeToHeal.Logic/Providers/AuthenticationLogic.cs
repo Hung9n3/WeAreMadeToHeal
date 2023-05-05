@@ -73,13 +73,13 @@ public class AuthenticationLogic : IAuthenticationLogic
         }
     }
     
-    public Task<User> Register(string username, string password)
+    public Task<User> Register(User user, string password)
     {
         try
         {
-            Guard.Argument(username, "username is null");
+            Guard.Argument(user.UserName, "username is null");
             Guard.Argument(password, "password is null");
-            var result = _dataProvider.Register(username, password);
+            var result = _dataProvider.Register(user, password);
 
             return result;
         }
