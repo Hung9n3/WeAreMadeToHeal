@@ -85,7 +85,7 @@ public class SeedProvider
             Name = "customer 1",
             UserName = "customer1",
             Role = UserRoles.Customer,
-            PasswordHash = "string",
+            PasswordHash = "AQAAAAIAAYagAAAAEIUC+pqIvFHEUAE17ledIw+SCgRPdXcny9lYXAFjjv+MEWSvj13NgQGCV9v80ikO+w==",
         });
 
         this.Users.Add(new User()
@@ -95,7 +95,7 @@ public class SeedProvider
             Name = "customer 2",
             UserName = "customer2",
             Role = UserRoles.Customer,
-            PasswordHash = "string",
+            PasswordHash = "AQAAAAIAAYagAAAAEIUC+pqIvFHEUAE17ledIw+SCgRPdXcny9lYXAFjjv+MEWSvj13NgQGCV9v80ikO+w==",
         });
 
         this.Users.Add(new User()
@@ -105,7 +105,7 @@ public class SeedProvider
             Name = "admin 1",
             UserName = "admin",
             Role = UserRoles.Admin,
-            PasswordHash = "string",
+            PasswordHash = "AQAAAAIAAYagAAAAEIUC+pqIvFHEUAE17ledIw+SCgRPdXcny9lYXAFjjv+MEWSvj13NgQGCV9v80ikO+w==",
         });
         #endregion
 
