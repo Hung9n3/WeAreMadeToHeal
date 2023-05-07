@@ -166,12 +166,12 @@ public class SeedProvider
         });
         #endregion
 
-
         #region [Products]
         this.Products.Add(new Product()
         {
             Id = "1",
             Name = "Product1",
+            Amount = 1000,
             Price = 10,
             CategoryId = "1",
         });
@@ -179,11 +179,11 @@ public class SeedProvider
         {
             Id = "2",
             Name = "Product2",
+            Amount = 1000,
             Price = 20,
             CategoryId = "2",
         });
         #endregion
-
 
         #region [TagProducts]
         this.TagProducts.Add(new TagProduct()
@@ -288,18 +288,24 @@ public class SeedProvider
             Id = "1",
             TotalPrice = 10,
             UserId = "1",
+            IsArrive= true,
+            IsPaid= true,
         });
         this.Orders.Add(new Order()
         {
             Id = "2",
             TotalPrice = 50,
             UserId = "1",
+            IsArrive = true,
+            IsPaid = true,
         });
         this.Orders.Add(new Order()
         {
             Id = "3",
             TotalPrice = 30,
             UserId = "2",
+            IsArrive = false,
+            IsPaid = false,
         });
         #endregion
 

@@ -5,6 +5,7 @@ namespace WeAreMadeToHeal
     public class Product : BaseEntity
     {
         public string Name { get; set; }
+        public int Amount { get; set; }
         public string CategoryId { get; set; }
         public string Size { get; set; }
         public string Story { get; set; } = string.Empty;

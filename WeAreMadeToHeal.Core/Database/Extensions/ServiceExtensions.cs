@@ -31,5 +31,28 @@ namespace WeAreMadeToHeal
 
 
         }
+
+        public static void AddInMemoryDatabase(this IServiceCollection services, IConfiguration configuration)
+        {
+            var databaseName = "WRMTH";
+
+            // Context
+            var options = new DbContextOptions<WRMTHDbContext>();
+            var builder = new DbContextOptionsBuilder<WRMTHDbContext>(options);
+
+            services.AddDbContext<WRMTHDbContext>(options => {
+                options.UseModel(SqlModelBuilder.Current.GetModel());
+                options.UseInMemoryDatabase(databaseName, (o) => {
+                    o.EnableNullChecks(false);
+                });
+#if DEBUG
+                options.EnableDetailedErrors();
+                options.EnableSensitiveDataLogging();
+#endif
+
+            });
+
+
+        }
     }
 }
