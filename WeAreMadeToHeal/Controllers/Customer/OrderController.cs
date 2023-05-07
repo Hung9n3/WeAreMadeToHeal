@@ -5,8 +5,11 @@ namespace WeAreMadeToHeal.Customer
 {
     public class OrderController : BaseCustomerController<Order, IOrderLogic>
     {
-        public OrderController(ILogger<BaseCustomerController<Order, IOrderLogic>> logger, ExcelHandlerService excelHandlerService, LogicContext logicContext, IOrderLogic logic) : base(logger, excelHandlerService, logicContext, logic)
+        private readonly IProductLogic _productLogic;
+        public OrderController(ILogger<BaseCustomerController<Order, IOrderLogic>> logger, 
+            ExcelHandlerService excelHandlerService, LogicContext logicContext, IOrderLogic logic, IProductLogic productLogic) : base(logger, excelHandlerService, logicContext, logic)
         {
+            _productLogic = productLogic;
         }
 
         #region [ Public Methods - Add | Update | Delete ]
@@ -19,6 +22,7 @@ namespace WeAreMadeToHeal.Customer
             try
             {
                 await this._logic.AddAsync(entity).ConfigureAwait(false);
+                await this._productLogic.UpdateAmountByOrder(entity).ConfigureAwait(false);
                 return base.Ok();
             }
             catch (ArgumentNullException ex)

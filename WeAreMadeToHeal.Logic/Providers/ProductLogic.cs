@@ -46,5 +46,14 @@ public class ProductLogic : BaseLogic<Product, IProductRepository>, IProductLogi
         var result = _dataProvider.GetByTag(tagId);
         return result;
     }
+
+    public Task UpdateAmountByOrder(Order order)
+    {
+        Guard.Argument(order, nameof(order));
+        Guard.Argument(order.OrderItems, nameof(order.OrderItems));
+
+        var result = _dataProvider.UpdateAmountByOrder(order);
+        return result;
+    }
     #endregion
 }

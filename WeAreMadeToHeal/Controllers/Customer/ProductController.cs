@@ -22,7 +22,7 @@ namespace WeAreMadeToHeal.Customer
             try
             {
                 var result = await this._logic.GetAsync(id).ConfigureAwait(false);
-                if (result == null)
+                if (result == null||!result.IsActive)
                 {
                     return base.NotFound(result);
                 }
@@ -58,6 +58,7 @@ namespace WeAreMadeToHeal.Customer
                 {
                     return base.NotFound(result);
                 }
+                result = result.Where(x => x.IsActive).ToList();
                 return base.Ok(result);
             }
             catch (ArgumentNullException ex)
@@ -89,6 +90,7 @@ namespace WeAreMadeToHeal.Customer
                 {
                     return base.NotFound(result);
                 }
+                result = result.Where(x => x.IsActive).ToList();
                 return base.Ok(result);
             }
             catch (ArgumentNullException ex)
@@ -120,6 +122,7 @@ namespace WeAreMadeToHeal.Customer
                 {
                     return base.NotFound(result);
                 }
+                result = result.Where(x => x.IsActive).ToList();
                 return base.Ok(result);
             }
             catch (ArgumentNullException ex)
@@ -151,6 +154,7 @@ namespace WeAreMadeToHeal.Customer
                 {
                     return base.NotFound(result);
                 }
+                result = result.Where(x => x.IsActive).ToList();
                 return base.Ok(result);
             }
             catch (ArgumentNullException ex)
@@ -180,6 +184,7 @@ namespace WeAreMadeToHeal.Customer
                 {
                     return base.NotFound(result);
                 }
+                result = result.Where(x => x.IsActive).ToList();
                 return base.Ok(result);
             }
             catch (ArgumentNullException ex)

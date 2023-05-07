@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -121,6 +122,37 @@ namespace WeAreMadeToHeal
                                                 .Where(x => x.Color == color).ToListAsync();
                 return dbResult;
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task UpdateAmountByOrder(Order order)
+        {
+            try
+            {
+                Guard.Argument(order, nameof(order));
+                Guard.Argument(order.OrderItems, nameof(order.OrderItems));
+
+
+                foreach(var item in order.OrderItems)
+                {
+                    var product = await base.GetAsync(item.ProductId);
+                    if (product == null) 
+                    {
+                        throw new Exception($"product with id {item.ProductId} does not existed");
+                    }
+                    product.Amount -= item.Amount;
+                    _dbSet.Update(product);
+                    await _context.SaveChangesAsync();
+                }
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException("An Exception occured. See inner stack trace for details.", ex);
             }
             catch (Exception ex)
             {

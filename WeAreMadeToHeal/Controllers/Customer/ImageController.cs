@@ -26,6 +26,7 @@ namespace WeAreMadeToHeal.Customer
                 {
                     return base.NotFound(result);
                 }
+                result = result.Where(x => x.IsActive).ToList();
                 return base.Ok(result);
             }
             catch (ArgumentNullException ex)

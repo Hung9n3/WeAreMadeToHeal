@@ -119,6 +119,61 @@ namespace WeAreMadeToHeal
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task UpdateArriveStatus(string orderId)
+        {
+            try
+            {
+                Guard.Argument(orderId, nameof(orderId));
+
+
+
+                var dbEntity = await _dbSet.FindAsync(orderId);
+                if (dbEntity == null)
+                {
+                    throw new Exception($"entity with id {orderId} does not existed");
+                }
+                dbEntity.IsArrive = true;
+                dbEntity.ArriveDate = DateTime.Now;
+                dbEntity.UpdatedAt = DateTime.Now;
+                _context.Update(dbEntity);
+                await _context.SaveChangesAsync();
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException("An Exception occured. See inner stack trace for details.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task UpdatePaidStatus(string orderId)
+        {
+            try
+            {
+                Guard.Argument(orderId, nameof(orderId));
+
+                var dbEntity = await _dbSet.FindAsync(orderId);
+                if (dbEntity == null)
+                {
+                    throw new Exception($"entity with id {orderId} does not existed");
+                }
+                dbEntity.IsPaid = true;
+                dbEntity.UpdatedAt = DateTime.Now;
+                _context.Update(dbEntity);
+                await _context.SaveChangesAsync();
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException("An Exception occured. See inner stack trace for details.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         #endregion
     }
 }

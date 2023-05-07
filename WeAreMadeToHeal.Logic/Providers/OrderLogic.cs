@@ -31,6 +31,20 @@ public class OrderLogic : BaseLogic<Order, IOrderRepository>, IOrderLogic
         var result = _dataProvider.GetByUserAsync(userId);
         return result;
     }
+
+    public Task UpdateArriveStatus(string orderId)
+    {
+        Guard.Argument(orderId, "UpdateArriveStatus");
+        var result = _dataProvider.UpdateArriveStatus(orderId);
+        return result;
+    }
+
+    public Task UpdatePaidStatus(string orderId)
+    {
+        Guard.Argument(orderId, "UpdatePaidStatus");
+        var result = _dataProvider.UpdatePaidStatus(orderId);
+        return result;
+    }
     #endregion
 
 }

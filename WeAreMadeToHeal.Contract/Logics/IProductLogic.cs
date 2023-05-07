@@ -12,5 +12,7 @@ namespace WeAreMadeToHeal
         Task<List<Product>> GetByTag(string tagId);
         Task<List<Product>> GetBySize(string size);
         Task<List<Product>> GetByColor(string color);
+        Task UpdateAmountByOrder(Order order);
+
     }
 }
