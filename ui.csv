@@ -1,0 +1,257 @@
+﻿Name,Type,1033,1043
+unavailable,message,Unavailable,
+sorry,message,Sorry,
+technical_error,message,A technical error has occured.,
+ok,button,Ok,
+continue,button,Continue,Doorgaan
+login,button,LOGIN,
+no,button,No,Nee
+yes,button,Yes,Ja
+login_no_instances,message,The user does not have enough access to the Dynamics instance.,
+login_invalid_resource,message,URL is not a Dynamics instance in the user's tenant.,
+login_cancel,message,Login Cancelled.,Inloggen geannuleerd
+login_access_denied,message,The app wasn't granted the required access to Dynamics.,
+login_no_access,message,The user does not have enough access to the Dynamics instance.,
+login_no_privilege_read_solutions_error,message,Missing privilege prvReadSolution.,Ontbrekende permissie prvReadSolution.
+login_privilege_error,message,Missing privilege,Onvoldoende rechten
+login_no_required_solution,message,No Connect-It 365 Mobile Client solution found.,Geen Connect-It 365 Mobile Client oplossing gevonden.
+login_account_login_error,message,Account login error.,Account login fout.
+login_no_bookable_resource,message,The user is not a bookable resource.,De gebruiker is geen boekbare resource.
+login_forbidden_error,message,Forbidden,Verboden toegang
+login_connect_it_not_found_error,message,Connect-It 365 not found,Connect-It 365 niet gevonden
+environment_title,page,Environments,Omgevingen
+environment_group_header,page,Select an environment,
+environment_failed,page,An error ocurred while connecting to selected environment. Please try again later.,
+my_appointment_title,page,My appointment,Mijn afspraken
+change_space_title,alert,Change selected space,
+change_space_message,alert,You are leaving this space. Do you want to mark it as completed?,
+invalid_area,message,Please input a valid area number.,
+environment_select,message,Please select an environment.,
+getting_data_ready,message,Getting data ready...,
+just_a_little_bit_longer,message,Just a little bit longer...,
+transfer_appointment,page,Do you want to tranfer this appointment to yourself?,
+does_not_allow_to_be_performed_by_tenant,page,This inspectionType doen not allow for any open actions to be performed by the tenant. Please check all open items,
+all_spaces_must_be_completed,page,This inspectionType requires all spaces to be marked as completed. Please check all open spaces,
+accept_appointment_alert_title,page,Accept Appointment Alert,
+ask_before_transfer_appointment,page,Do you want to tranfer this appointment to yourself?,
+not_found_appointment,page,Appointment not found,
+update_success,message,Update Successfully,
+update_appointment_success_but_fail_with_owner,page,Update Appointment successfully but failed to update the inspection's owner,
+update_failed,message,Update failed,
+finish_inspection_alert_title,page,Finish Inspection Alert,
+select_inspection,message,Please select inspection,
+metertype,page,Meter Type,Meter soort
+finish_inspection_alert_message,alert,Succesfully finished the inspection,
+meternumber,page,Meter Number,Meternumber
+meter_reading,page,Meter Reading,Meterstand
+amount,page,Amount,Aantal
+amount,page,Amount,Aantal
+photo,page,Photos,Foto's
+keytype,page,Key Type,Sleutel Soort
+keynumber,page,Key Number,Sleutel Nummer
+description,page,Description,Beschrijving
+add_meterreading,page,Add Meter Reading,
+add_key,page,Add Key,Sleutel toevoegen
+keyexpected_amount,page,Key Expected Amount,
+keypresent_amount,page,Key(s) Present Amount,
+name,page,Name,Naam
+logout,button,Logout,Uitloggen
+logout_confirm,message,Do you want to logout?,
+cancel,button,Cancel,Annuleren
+acquisition,title,Acquisition,Overname
+add_selfmade,text,Add Self-Made,Add ZAV
+cost_accountable_to,label,Cost Acountable To,Kosten voor
+removalby,label,Removal By,
+acquisition_task_type,label,Acquisition Task Type,
+selfmade_task_type,label,Self-Made Task Type,
+space,label,Space,Ruimte
+agreed_by_new_tenant,label,Agreed By New Tenant,
+total_cost,label,Total Cost,Totale Prijs
+action,label,Action,
+select_task_type,title,Select Service Task Type,
+asbestos,title,Asbestos,Asbest
+asbestos_task_type,label,Asbestos Task Type,
+sync_succeeded,message,synced.,
+sync_failed,message,sync failed.,
+new_appointment,text,Add Appointment,Nieuwe afspraak
+save,button,Save,Opslaan
+confirm_appointment,label,Confirm Appointment,
+syncing_data,message,Syncing started...,
+socialsupport_task_type,label,Social Support Task Type,
+socialsupport,title,Social Support,WMO
+unknown,message,Unknown,
+setting,sync,Setting,
+appointment,sync,Appointment,
+key,sync,Key,Sleutels
+area,sync,Area,
+meter_type,sync,Meter type,
+document,sync,Document,
+mutation_contact,sync,Mutation contact,
+document_relation,sync,Document relation,
+service_task_type,sync,Service task type,
+system_user,sync,System user,
+inspection_type,sync,Inspection type,
+bookable_resource,sync,Bookable resource,
+incident,sync,Incident,
+maintenance_task,label,Maintenance Task,Onderhoudstaak
+select_key_type,label,Select Key Type,
+please_type_a_number,message,Please type a number,
+appointment_type,label,Appointment type,Afspraaksoort
+select_one,label,Select one,
+begin_date,label,Begin date,Begin datum
+begin_time,label,Begin time,Starttijd
+duration_in_minutes,label,Duration in minutes,Duur in minuten
+eur,currency,EUR,
+initial_inspection,label,initial inspection,aanvangsinspectie
+lease_termination,label,lease termination,huuropzegging
+pre_inspection,label,pre-inspection,voorinspectie
+final_inspection,label,final inspection,eindinspectie
+number,label,Number,Aantal
+execution_by,label,Execution by,Uilvoering door
+removal_cost,label,Removal cost,Kosten verwijdering
+cost_for,label,Costs for,Kosten voor
+photos,label,Photos,Foto's
+particularities,label,Particularities,Bijzonderheden
+add_maintenance_task,button,Add maintenance task,Onderhoudstaak toevoegen
+add_maintenance_task,page,Add maintenance task,Onderhoudstaak toevoegen
+minute_short,label,min,
+duration_short,label,Dur,Duur
+add_space,page,Add space,Ruimte toevoegen
+floor_space,label,Floor space,Vloeroppervlakte
+m2,label,m2,
+add,button,Add,toevoegen
+key,label,Key,Sleutels
+acquisition,label,Acquisition,Overname
+asbestos,label,Asbestos,Asbest
+zav,label,Self-made Improvement,ZAV
+wmo_adjustment,label,WMO adjustment,WMO aanpassing
+look_out,message,Look out!,LET OP!
+room_delete_confirm,message,Are you sure you want to delete this room?,Weet u zeker dat u deze kamer wilt verwijderen?
+my_mutations_title,page,My mutations,mijn mutaties
+accept_appointment,label,Accept appointment,Afspraak overnemen
+new_appointment,label,New appointment,Nieuwe afspraak
+delete,button,Delete,Verwijderen
+take_over_appointment_title,page,Take over appointment,Afpraak overnemen
+social_support_act,label,Social Support Acts,WMO aanpassingen
+selfmade_improvement,label,Self-Made Improvements,ZAV
+acquisitions,label,Acquisitions,Overnames
+inspection_task,label,Inspection Tasks,Onderhoudstaken
+keys,label,Keys,Steutels
+meter_readings,label,Meter Readings,Meterstanden
+documents,label,Documents,DMS Documenten
+smoke_detectors,label,Smoke Detetors,Rookmelders
+pictures,label,Pictures,Afbeeldingen
+total_euro_format,label,Total: € {0},Aantal: € {0}
+description_format,label,Description: {0},Beschrijving: {0}
+action_format,label,Action: {0},Actie: {0}
+performed_by_format,label,Removal By: {0},Uitvoering: {0}
+cost_accountable_to_format,label,Cost Acountable To: {0},Koten: {0}
+removal_cost_format,label,Total cost: €{0},Kosten verwijdering: € {0}
+received_keys_format,label,Received: {0} Keys,Ontvangen: {0} Steutels
+quantity_keys_format,label,Quantity: {0} Piece(s),Aantal: {0} Stuks
+expected_keys_format,label,Expected Key(s): {0},Verwacht sleutel(s): {0}
+keys_to_order_format,label,Key(s) To Order: {0},Sleutel(s) te bestellen: {0}
+key_present_format,label,Key(s) present: {0},Sleutel(s) aanwezig: {0}
+price_per_key_format,label,Price Per Key: € {0},Prijs per sleutel: € {0}
+total_amount_missing_keys_format,label,Total Amount Missing Key(s): € {0},Totaalbedrag ontbrekende sleutel(s): € {0}
+total_amount_keys_to_order_format,label,Total Amount Key(s) To Order: € {0},Prijs sleutel(s) te bestellen: € {0}
+number_format,label,Number: {0},Nummer: {0}
+price_format,label,Price: {0} €,Prijs: € {0}
+total_cost_euro_format,label,Total: € {0},Totaal: € {0}
+meter_reading_format,label,Meter Reading: {0},Meterstand: {0}
+is_smoke_detector_available,label,Is smoke detector available?,Rookmelder aanwezig?
+skip,label,Skip,Overslaan
+syncing,message,Syncing,
+inspection_not_found,label,Inspection not found,Inspectie niet gevonden
+duration_format,label,Duration : {0},Duur: {0}
+edit,button,Edit,Bewerking
+view,button,View,Weergave
+contact_preference,label,Contact Preference,Contact Voorkeur
+email,label,E-mail,E-mailen
+post_address,label,Post Addresss,Postadres
+issued_format,label,Issued: {0},Uitgegeven: {0}
+ordered_format,label,Ordered: {0},Besteld: {0}
+total_included_vat_format,label,Total including VAT:,Totaal inclusief BTW:
+outstanding_tasks_costs_residential_care,label,Outstanding tasks and costs Residential care?,Openstaande taken en kosten Woonzorg?
+outstanding_tasks_costs_tenant,label,Outstanding tasks and costs Tenant,Openstaande taken en kosten Huurder
+signature,label,Signature,Handtekening
+no_signature_obtained,label,No signature obtained,Geen handtekening verkregen
+credential_type,label,Credential type,Legitimatietype
+given_legitimation,label,Given Legitimation,Legitimatie gezien
+reason,label,Reason,Reden
+select_reason,label,Select a reason,Selecteer een reden
+lease_contract,page,Lease Contract,Huurcontract
+rental_begin_date,label,Rental Begin Date,Aanvang huur
+cancelled_date,label,Cancelled Date,Oppezegd per
+rental_ended_date,label,Rental Ended Date,Einde huur
+delayed_payment,label,Delayed Payment,Openstaand saldo
+cancelation_reason,label,Cancelation Reason,Reden opzegging
+contract_was_calcelled,label,The contract was cancelled due tio the death of the resident.,Contract is opgezegd vanwege overlijden bewoner.
+hour_format,label,{0},{0} uur
+tenant_information,page,Tenant informations,Informatie huurder
+add_success,message,Successfully Added,
+add_fail,message,Added Failed,
+update_fail,message,Update Failed,
+removal_by_format,label,Removal By: {0},verwijderd door: {0}
+acquisition_agreed_on,label,Acquisition agreed on,Overname akkoord nieuwe huurder
+no_new_tenant,label,No new tenant - property remains,Geen nieuwe huurder - overname blijft achter
+removed_by_coropation,label,Acquisition not agreed on - removal by corporation,Overnaem niet akkoord - verweijderen door corporatie
+removed_by_tenant,label,Acquisition not agreed on - removed by tenant,Overname niet akkoord - verwijderd door huurder
+contact_person,label,Contact Person,Contactpersoon
+update,label,Update,Update
+mobile_phone_number,label,Mobile Phone Number,Mobiele telefoonnummer
+email_address,label,Email Address,E-mailadres
+street_address,label,Street Address,Adres
+zip_postal_code,label,Postal Code,Postcode
+city,label,City,Stad
+transfer_appointment_success,message,The appointment has been added to your schedule.,De afspraak is toegevoegd aan uw planning.
+relation_to_tenant,label,Relation To Tenant,Relatie met huurder
+role,label,Role,Rol
+eur_format,label,€ {0},€ {0}
+unit,label,Unit,Eenheid
+information,label,Information,Informatie
+buffer,label,Buffer,Buffer
+log_book,label,Log Book,Logboek
+inspection_task,title,Maintenance Task,Onderhoudstaak
+complete_inspection,title,Complete,Afronden
+readonly_area_page,message,This record is already processed in the backend. No changes allowed.,Dit record is reeds verwerkt in andere systemen. Geen aanpassingen meer toegestaan.
+minimum_filter_level,label,Minimum filter level,Filter minimaal niveau
+retrive_data,button,Retrieve Data,Gegevens ophalen
+no_buffer_items,label,No Buffer Items,Geen buffer items
+no_buffer_items_to_display,message,There are no buffer items to display,Er zijn geen buffer items om weer te geven
+delete_data,button,Delete Data,Gegevens verwijderen
+url,label,Url,Url
+version,label,Version,Versie
+cache,label,Cache,Cache
+last_activate_buffer,label,Last Activate Buffer,Laastie buffer activiteit
+network_status,label,Network Status,Netwerkstatus
+database_file_size,label,Database File Size,Database bestandsgrootte
+push_notification_device_id,label,Push Notification Device ID,Pushnitificatie apparaat ID,
+connected,text,Connected,Verbonden
+not_connected,text,Not Connected,Niet verbonden
+format_location,text,"Latitude: {0}, Longitude: {1}","Breedtegraad: {0}, Lengtegraad: {1}"
+language_code,,en-EN,nl-NL
+retrieve_data,alert,Do you want to retrieve data ?,
+missing_keys,label,Missing Key(s),Kwijtgeraakte sleutel(s)
+missing_keys_format,label,Missing Key(s): {0},Kwijtgeraakte sleutel(s): {0}
+price_per_key,label,Price Per Key,Prijs per sleutel
+total_amount_missing_keys,label,Total Amount Missing Key(s),Totaalbedrag ontbrekende sleutel(s)
+total_amount_keys_to_order,label,Total Amount Key(s) To Order,Prijs sleutel(s) te bestellen
+key_to_order,label,Key(s) To Order,Sleutel(s) te bestellen
+please_type_a_number,message,Please type a number,Typ een nummer
+amount_format,label,Amount: {0},Aantal: {0}
+support,label,Support,Steun
+support_subject,label,[Support] ViaData Inspection App,
+support_body,label,There was issue with the app.,
+verify_environment_error,message,Verify environment {0} has failed.,
+no_internet,text,No Internet connection,Geen internet verbinding
+inspection,title,Inspection,Inspectie
+error_count,label,Error Count,Aantal Fouten
+in_progress,label,In Progress,Handelwijze
+home,title,Home,Woning
+loglevel_error,label,Error,Fout
+loglevel_warning,label,Warning,Waarschuwing
+loglevel_information,label,Information,Informatie
+loglevel_debug,label,Debug,Debuggen
+tenant,label,Tenant,Huuder
+co-tenant,label,Co-tenant,Mederhuuder
