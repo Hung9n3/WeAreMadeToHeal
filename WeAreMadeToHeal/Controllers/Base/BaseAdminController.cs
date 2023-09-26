@@ -8,6 +8,7 @@ namespace WeAreMadeToHeal
     [ApiController]
     [Authorize(Roles = "Admin")]
     [Route("api/admin/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiVersion("1.0")]
     public abstract class BaseAdminController<TEntity, TLogic> : ControllerBase where TEntity : BaseEntity where TLogic : IBaseLogicProvider<TEntity>
     {

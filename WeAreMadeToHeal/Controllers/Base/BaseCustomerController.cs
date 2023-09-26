@@ -30,8 +30,5 @@ namespace WeAreMadeToHeal
             this._logic = logic;
         }
         #endregion
-
-
-
     }
 }

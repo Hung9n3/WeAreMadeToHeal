@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WeAreMadeToHeal.Enums;
 
 namespace WeAreMadeToHeal.Customer
 {
@@ -11,7 +12,7 @@ namespace WeAreMadeToHeal.Customer
 
         #region [ Public Methods - Single ]
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Customer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -47,7 +47,7 @@ public class AuthenticationLogic : IAuthenticationLogic
                         new Claim("UserId", user.Id.ToString()),
                         new Claim("DisplayName", user.Name),
                         new Claim("Email", user.Email),
-                        new Claim(ClaimTypes.Role, user.Role.ToString())
+                        //new Claim(ClaimTypes.Role, user.Role.ToString())
                     };
 
             // generate token that is valid for ExpiredToken days
